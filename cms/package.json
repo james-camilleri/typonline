@@ -1,0 +1,31 @@
+{
+  "name": "typonline-cms",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "start": "sanity start",
+    "build": "sanity build && node ./node_modules/@james-camilleri/replace-sanity-favicon"
+  },
+  "author": "James Camilleri",
+  "license": "ISC",
+  "dependencies": {
+    "@james-camilleri/replace-sanity-favicon": "^1.0.1",
+    "@james-camilleri/sanity-web-image": "^1.0.10",
+    "@james-camilleri/slack-logger": "^1.2.6",
+    "@netlify/functions": "^1.0.0",
+    "@sanity/base": "^2.29.3",
+    "@sanity/cli": "^2.29.3",
+    "@sanity/client": "^3.3.0",
+    "@sanity/components": "^2.14.0",
+    "@sanity/core": "^2.29.3",
+    "@sanity/default-layout": "^2.29.3",
+    "@sanity/default-login": "^2.29.3",
+    "@sanity/desk-tool": "^2.29.3",
+    "@sanity/vision": "^2.29.3",
+    "prop-types": "^15.8.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-icons": "^4.3.1",
+    "styled-components": "^5.3.5"
+  }
+}

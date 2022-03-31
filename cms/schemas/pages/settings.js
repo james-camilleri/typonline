@@ -1,16 +1,14 @@
 export default {
-  name: 'pageSettings',
+  name: 'settings',
   type: 'document',
   title: 'Settings',
   __experimental_actions: ['update', 'publish'],
   fields: [
     {
-      name: 'title',
-      type: 'string',
-    },
-    {
-      name: 'subtitle',
-      type: 'string',
+      name: 'ngrokUrl',
+      title: 'ngrok URL',
+      type: 'url',
+      readOnly: true,
     },
   ],
 }

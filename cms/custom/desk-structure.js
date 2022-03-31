@@ -1,5 +1,5 @@
 import S from '@sanity/desk-tool/structure-builder'
-import { RiDraftLine } from 'react-icons/ri'
+import { RiDraftLine, RiSettings2Line } from 'react-icons/ri'
 
 export default () =>
   S.list()
@@ -17,11 +17,11 @@ export default () =>
       S.divider(),
       S.listItem()
         .title('Settings')
-        .icon(undefined)
+        .icon(RiSettings2Line)
         .child(
           S.document()
             .title('Settings')
-            .schemaType('pageSettings')
+            .schemaType('settings')
             .documentId('settings'),
         ),
     ])

@@ -12,6 +12,11 @@ html {
   font-size: math.div(config.$base-font-size, 16px) * 100%;
   font-weight: 300;
   overflow-wrap: normal;
+
+  // Pre-generate heading font-sizes for easy scaling/alignment later.
+  @for $i from 1 through 5 {
+    --h#{$i}-font-size: #{list.nth(size.$heading-sizes, $i)};
+  }
 }
 
 html,
@@ -52,7 +57,7 @@ pre {
 
   #{$heading} {
     margin: list.nth(size.$heading-sizes, $i) 0 size.$sm;
-    font-size: list.nth(size.$heading-sizes, $i);
+    font-size: var(#{--#{$heading}-font-size});
 
     &:first-child {
       margin-top: 0;
@@ -66,7 +71,15 @@ mark,
   background-color: var(--primary);
 }
 
-h1::after {
-  content: "_";
-  color: var(--primary);
+h1 {
+  &::after {
+    content: "_";
+    color: var(--primary);
+  }
+
+  @media (max-width: breakpoints.$sm) {
+    font-size: var(--xl);
+
+    overflow-wrap: anywhere;
+  }
 }

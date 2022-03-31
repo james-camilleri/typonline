@@ -5,7 +5,7 @@
   import Twitter from '@fortawesome/fontawesome-free/svgs/brands/twitter.svg'
   import YouTube from '@fortawesome/fontawesome-free/svgs/brands/youtube.svg'
 
-  import { normaliseNavItems } from '$lib/utils/urls'
+  import Heartbeat from './Heartbeat.svelte'
   import CONFIG from '$lib/config'
 
   const links = [
@@ -29,21 +29,7 @@
 </script>
 
 <footer>
-  {#if links?.length > 0}
-    <div class="links">
-      {#each normaliseNavItems(links) as { text, link, external }}
-        {#if external}
-          <a href={link} rel="noopener" target="_blank">
-            {text}
-          </a>
-        {:else}
-          <a href={link} sveltekit:prefetch>
-            {text}
-          </a>
-        {/if}
-      {/each}
-    </div>
-  {/if}
+  <Heartbeat />
 
   {#if Object.entries(social).length > 0}
     <div class="icons">

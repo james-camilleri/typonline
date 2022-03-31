@@ -18,7 +18,7 @@ $ratio: "octave";
 
 :root {
   // Colours
-  --light: rgb(245, 243, 245);
+  --light: rgb(245 243 245);
   --dark: rgb(20 18 4);
   --foreground: var(--dark);
   --background: var(--light);
@@ -29,8 +29,8 @@ $ratio: "octave";
 
   --info: rgb(0 0 255);
   --warning: rgb(255 255 0);
-  --error: rgb(255 0 0);
-  --success: rgb(0 255 0);
+  --error: rgb(186 18 0);
+  --success: rgb(101 184 145);
 
   // Spacing
   --gutter: var(--lg);

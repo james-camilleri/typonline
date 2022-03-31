@@ -8,6 +8,7 @@
 
   export let name: string
   export let label: string = null
+  export let hideLabel = false
   export let hint: string = null
   export let type: string = 'text'
   export let value: string = ''
@@ -47,7 +48,7 @@
 </script>
 
 <FormGroup {width}>
-  <label for={id}
+  <label for={id} class:screen-reader-only={hideLabel}
     >{label ?? capitalise(name)}{#if optional}<span class="optional"
         >optional</span
       >{/if}</label

@@ -48,7 +48,7 @@
   </Transition>
   <Transition order={1}>
     <Grid>
-      <Input name="text" type="textarea" bind:value={text} />
+      <Input name="text" type="textarea" hideLabel bind:value={text} />
       <StateButton
         on:click={submitText}
         {state}

@@ -35,7 +35,7 @@
 
   main {
     position: relative;
-    margin: 0 var(--gutter);
+    margin: var(--md) var(--gutter) 0;
 
     @media (min-width: breakpoints.$md) {
       margin: 0 var(--xxl);

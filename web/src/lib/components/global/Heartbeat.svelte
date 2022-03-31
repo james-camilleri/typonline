@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from '$app/env'
   import { onDestroy } from 'svelte'
 
   const HEARTBEAT_TIMEOUT = 5000
@@ -16,9 +17,11 @@
     connected = false
   }
 
-  heartbeat()
-  const interval = setInterval(heartbeat, HEARTBEAT_TIMEOUT)
-  onDestroy(() => clearInterval(interval))
+  if (browser) {
+    heartbeat()
+    const interval = setInterval(heartbeat, HEARTBEAT_TIMEOUT)
+    onDestroy(() => clearInterval(interval))
+  }
 </script>
 
 <div

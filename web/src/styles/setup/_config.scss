@@ -6,25 +6,24 @@
 // [5] Add custom styles as required.
 
 // Typography.
-$font-family: "";
-$base-font-size: 16px;
-$base-font-weight: 300; // For variable fonts.
-$line-height: 1.5;
+$font-family: "click-clack";
+$base-font-size: 25px;
+$line-height: 1.4;
 
 // Typographic ratio.
 // Select from: 'octave', 'major-seventh', 'minor-seventh', 'major-sixth',
 // 'minor-sixth', fifth', 'augmented-fourth', 'fourth', 'major-third',
 // 'minor-third', 'major-second', 'minor-second', 'cinema', and 'golden'.
-$ratio: "fourth";
+$ratio: "octave";
 
 :root {
   // Colours
-  --light: rgb(255 255 255);
-  --dark: rgb(0 0 0);
+  --light: rgb(245, 243, 245);
+  --dark: rgb(20 18 4);
   --foreground: var(--dark);
   --background: var(--light);
 
-  --primary: rgb(127 127 127);
+  --primary: rgb(255 127 0);
   --secondary: rgb(200 200 200);
   --neutral: rgb(80 80 80);
 
@@ -34,7 +33,7 @@ $ratio: "fourth";
   --success: rgb(0 255 0);
 
   // Spacing
-  --gutter: var(--xl);
+  --gutter: var(--lg);
 
   // Borders
   --border-width: 5px;

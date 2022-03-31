@@ -9,22 +9,22 @@
   import CONFIG from '$lib/config'
 
   const links = [
-    {
-      text: 'home',
-      link: '/',
-    },
-    {
-      text: 'external link',
-      link: 'https://james.mt',
-    },
+    // {
+    //   text: 'home',
+    //   link: '/',
+    // },
+    // {
+    //   text: 'external link',
+    //   link: 'https://james.mt',
+    // },
   ]
 
   const social = {
-    facebook: { icon: Facebook, link: 'https://www.facebook.com/' },
-    instagram: { icon: Instagram, link: 'https://www.instagram.com/' },
-    twitter: { icon: Twitter, link: 'https://www.twitter.com/' },
-    youtube: { icon: YouTube, link: 'https://www.youtube.com/' },
-    github: { icon: Github, link: 'https://www.github.com/' },
+    // facebook: { icon: Facebook, link: 'https://www.facebook.com/' },
+    // instagram: { icon: Instagram, link: 'https://www.instagram.com/' },
+    // twitter: { icon: Twitter, link: 'https://www.twitter.com/' },
+    // youtube: { icon: YouTube, link: 'https://www.youtube.com/' },
+    // github: { icon: Github, link: 'https://www.github.com/' },
   }
 </script>
 
@@ -56,8 +56,7 @@
     </div>
   {/if}
 
-  <span class="copyright"
-    >&copy; {CONFIG.GENERAL.siteTitle} {new Date().getFullYear()}</span
+  <span class="copyright">&copy; Evina & James, {new Date().getFullYear()}</span
   >
 </footer>
 
@@ -70,9 +69,7 @@
     align-items: center;
     padding: var(--md);
     margin-top: var(--gutter);
-    font-size: var(--sm);
     background: var(--background);
-    border-top: var(--border);
 
     > * {
       // Vertical spacing for mobile view.
@@ -111,6 +108,7 @@
     footer {
       flex-direction: row;
       justify-content: space-between;
+      padding: var(--md) var(--xxl);
 
       > * {
         flex: 1 0 33%;

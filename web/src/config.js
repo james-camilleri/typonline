@@ -1,6 +1,6 @@
 export default {
   GENERAL: {
-    siteTitle: 'TypOnline',
+    siteTitle: 'typo',
   },
 
   BREAKPOINTS: {
@@ -17,11 +17,5 @@ export default {
     projectId: 'i8yrdmec',
     dataset: 'production',
     apiVersion: '2022-03-01',
-  },
-
-  CONTACT_EMAIL: {
-    destination: 'info@__________.___',
-    host: 'mail.__________.___',
-    port: 465,
   },
 }

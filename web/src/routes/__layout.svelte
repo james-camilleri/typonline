@@ -7,7 +7,6 @@
 <script lang="ts">
   import '../styles/global.scss'
 
-  import Header from '$lib/components/global/Header.svelte'
   import Footer from '$lib/components/global/Footer.svelte'
   import PageTransition from '$lib/components/transition/PageTransition.svelte'
 
@@ -15,7 +14,6 @@
 </script>
 
 <div class="grid">
-  <Header />
   <main>
     <PageTransition {url}>
       <slot />
@@ -24,10 +22,12 @@
   <Footer />
 </div>
 
-<style>
+<style lang="scss">
+  @use '../styles/breakpoints';
+
   .grid {
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: 1fr auto;
     height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
@@ -36,5 +36,9 @@
   main {
     position: relative;
     margin: 0 var(--gutter);
+
+    @media (min-width: breakpoints.$md) {
+      margin: 0 var(--xxl);
+    }
   }
 </style>

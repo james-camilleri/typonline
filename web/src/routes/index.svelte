@@ -3,44 +3,61 @@
 </script>
 
 <script lang="ts">
+  import type { State } from '$lib/components/form/StateButton.svelte'
+
   import Title from '$lib/components/global/Title.svelte'
-  import FullWidth from '$lib/components/layout/FullWidth.svelte'
   import Grid from '$lib/components/layout/Grid.svelte'
-  import LoremIpsum from '$lib/components/prototyping/LoremIpsum.svelte'
-  import Placeholder from '$lib/components/prototyping/Placeholder.svelte'
   import Transition from '$lib/components/transition/Transition.svelte'
+  import Input from '$lib/components/form/Input.svelte'
+  import StateButton, { STATE } from '$lib/components/form/StateButton.svelte'
 
   import CONFIG from '$lib/config'
+  const RESET_TIMEOUT = 5000
+
+  let text = ''
+  let state: State = STATE.IDLE
+
+  async function submitText() {
+    if (text === '') return
+
+    state = STATE.WAITING
+    try {
+      const response = await fetch('/typewriter/type', {
+        method: 'POST',
+        body: JSON.stringify({ text }),
+      })
+
+      state = response.ok ? STATE.SUCCESS : STATE.ERROR
+      if (response.ok) {
+        text = ''
+      }
+    } catch (e) {
+      state = STATE.ERROR
+    }
+
+    setTimeout(() => {
+      state = STATE.IDLE
+    }, RESET_TIMEOUT)
+  }
 </script>
 
 <Title text={CONFIG.GENERAL.siteTitle} />
 <Grid>
   <Transition order={0}>
-    <LoremIpsum sentences={2} />
+    <p>Use the textbox below to test the automated typewriter.</p>
   </Transition>
-  <FullWidth>
-    <Transition order={1}>
-      <Placeholder height={400} />
-    </Transition>
-  </FullWidth>
-  <Grid columns={2}>
-    <Transition order={2}>
-      <LoremIpsum paragraphs={5} />
-    </Transition>
-    <Transition order={3}>
-      <Placeholder caption="An image" />
-    </Transition>
-  </Grid>
-  <Grid columns={[3, 2, 1]}>
-    {#each new Array(3) as _, i}
-      <Grid>
-        <Transition order={4 + i}>
-          <Placeholder caption="Another image" height={350} />
-        </Transition>
-        <Transition order={5 + i}>
-          <LoremIpsum paragraphs={3 - i} />
-        </Transition>
-      </Grid>
-    {/each}
-  </Grid>
+  <Transition order={1}>
+    <Grid>
+      <Input name="text" type="textarea" bind:value={text} />
+      <StateButton
+        on:click={submitText}
+        {state}
+        messages={{
+          [STATE.WAITING]: 'Sending...',
+          [STATE.ERROR]: 'Boom! Something broke.',
+          [STATE.SUCCESS]: 'Clickety clack!',
+        }}>Send</StateButton
+      >
+    </Grid>
+  </Transition>
 </Grid>

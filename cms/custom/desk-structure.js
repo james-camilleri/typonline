@@ -1,5 +1,5 @@
 import S from '@sanity/desk-tool/structure-builder'
-import { RiDraftLine, RiSettings2Line } from 'react-icons/ri'
+import { RiAsterisk, RiDraftLine, RiSettings2Line } from 'react-icons/ri'
 
 export default () =>
   S.list()
@@ -15,6 +15,15 @@ export default () =>
             .schemaType('post'),
         ),
       S.divider(),
+      S.listItem()
+        .title('Performance')
+        .icon(RiAsterisk)
+        .child(
+          S.document()
+            .title('Performance')
+            .schemaType('performance')
+            .documentId('performance'),
+        ),
       S.listItem()
         .title('Settings')
         .icon(RiSettings2Line)

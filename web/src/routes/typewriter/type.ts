@@ -21,8 +21,9 @@ export async function post({ request }) {
     ])
 
     const { ngrokUrl } = settings
-    const { text } = payload
+    const { text, savePost } = payload
 
+    // Push text to typewriter.
     const response = await fetch(ngrokUrl, {
       method: 'POST',
       headers: {
@@ -32,8 +33,15 @@ export async function post({ request }) {
       body: JSON.stringify({ text }),
     })
 
-    console.log(response)
-    if (response.ok) return { status: 200 }
+    // Store text in Sanity.
+    if (response.ok && savePost) {
+      await client.create({
+        _type: 'post',
+        post: text,
+      })
+
+      return { status: 200 }
+    }
   } catch (e) {
     return {
       status: 500,

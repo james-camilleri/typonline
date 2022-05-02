@@ -5,12 +5,14 @@
   const HEARTBEAT_TIMEOUT = 5000
 
   let connected = false
+  let version = null
 
   async function heartbeat() {
     const heartbeat = await fetch('/config/heartbeat')
 
     if (heartbeat.ok) {
       connected = true
+      version = await heartbeat.text()
       return
     }
 
@@ -31,18 +33,19 @@
 >
   <div class="indicator" class:connected />
   <p>{connected ? 'connected' : 'connecting'}</p>
+  {#if version}<small>({version})</small>{/if}
 </div>
 
 <style>
   .wrapper {
     display: flex;
     align-items: center;
+    gap: 0.5em;
   }
 
   .indicator {
     width: 1.2em;
     height: 1.2em;
-    margin-inline-end: 0.5em;
     background: var(--colour);
     border-radius: 100%;
     transition: background 1s ease-in;

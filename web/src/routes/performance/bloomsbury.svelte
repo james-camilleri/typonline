@@ -17,7 +17,7 @@
   import { STATE, type State } from '$lib/components/form/StateButton.svelte'
   import type { Performance } from '$lib/types/pages/performance'
 
-  import shuffle from 'lodash/shuffle'
+  import shuffle from 'lodash/shuffle.js'
   import { onMount, tick } from 'svelte'
 
   // import { generateText } from '$lib/ml/generate'

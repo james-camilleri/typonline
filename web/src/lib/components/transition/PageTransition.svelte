@@ -12,6 +12,11 @@
 {/key}
 
 <style>
+  div {
+    display: grid;
+    height: 100%;
+  }
+
   /* Since two divs exist simultaneously while transitioning in and out,
   the page height jumps around significantly as the new div is added to the
   bottom of the container and animated in. By positioning the previous div

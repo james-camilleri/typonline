@@ -14,6 +14,7 @@
   export let value: string = ''
   export let optional = false
   export let width: 'short' | 'long' | 'full' = 'short'
+  export let ref: HTMLElement | null = null
 
   export let validations: Validation[] = []
   export let validate = false
@@ -71,6 +72,7 @@
       type="text"
       style={errorText ? '--border-colour: var(--error)' : ''}
       bind:value
+      bind:this={ref}
     />
   {:else}
     <input
@@ -81,6 +83,7 @@
       style={errorText ? '--border-colour: var(--error)' : ''}
       on:change={onChange}
       on:keydown={onChange}
+      bind:this={ref}
     />
   {/if}
 </FormGroup>

@@ -21,5 +21,8 @@
   // Remove default (large) spacing before subtitle.
   h2 {
     margin-top: 0;
+    font-size: var(--lg);
+    font-weight: 300;
+    text-transform: lowercase;
   }
 </style>

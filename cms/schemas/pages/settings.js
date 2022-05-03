@@ -15,7 +15,7 @@ export default {
       name: 'keyMap',
       title: 'DMX key mapping',
       description: 'The DMX channel for each typewriter key. JSON mapping.',
-      type: 'string',
+      type: 'text',
       fieldset: 'typewriter',
       validation: (Rule) => Rule.required(),
     },

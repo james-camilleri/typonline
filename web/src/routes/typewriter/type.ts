@@ -39,9 +39,9 @@ export async function post({ request }) {
         _type: 'post',
         post: text,
       })
-
-      return { status: 200 }
     }
+
+    return { status: 200 }
   } catch (e) {
     return {
       status: 500,

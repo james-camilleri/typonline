@@ -5,14 +5,14 @@
   const HEARTBEAT_TIMEOUT = 5000
 
   let connected = false
-  let version = null
+  let heartbeatData = null
 
   async function heartbeat() {
     const heartbeat = await fetch('/config/heartbeat')
 
     if (heartbeat.ok) {
       connected = true
-      version = await heartbeat.text()
+      heartbeatData = await heartbeat.json()
       return
     }
 
@@ -33,7 +33,7 @@
 >
   <div class="indicator" class:connected />
   <p>{connected ? 'connected' : 'connecting'}</p>
-  {#if version}<small>({version})</small>{/if}
+  {#if heartbeatData}<small>({heartbeatData.version})</small>{/if}
 </div>
 
 <style>

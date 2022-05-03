@@ -12,6 +12,14 @@ export default {
       readOnly: true,
     },
     {
+      name: 'keyMap',
+      title: 'DMX key mapping',
+      description: 'The DMX channel for each typewriter key. JSON mapping.',
+      type: 'string',
+      fieldset: 'typewriter',
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: 'charsPerLine',
       title: 'Characters per line',
       description:

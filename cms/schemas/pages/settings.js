@@ -29,10 +29,19 @@ export default {
       validation: (Rule) => Rule.required().min(10),
     },
     {
-      name: 'newlineRotationDegrees',
-      title: 'Carriage motor rotation (degrees)',
+      name: 'carriageReturnSteps',
+      title: 'Carriage return motor rotation (steps)',
       description:
-        'Degrees of rotation required for a full pull of the carriage. (This only needs to be modified if the typewriter is changed.)',
+        'Stepper motor steps required for a full pull of the carriage. (This only needs to be modified if the typewriter is changed.)',
+      type: 'number',
+      fieldset: 'typewriter',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'newlineRotationSteps',
+      title: 'Newline motor rotation (steps)',
+      description:
+        'Stepper motor steps required for pulling the newline lever. (This only needs to be modified if the typewriter is changed.)',
       type: 'number',
       fieldset: 'typewriter',
       validation: (Rule) => Rule.required(),

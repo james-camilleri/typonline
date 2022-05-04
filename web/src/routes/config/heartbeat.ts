@@ -25,6 +25,11 @@ export async function get() {
         body: await response.json(),
       }
     }
+
+    return {
+      status: response.status,
+      body: 'Heartbeat failed.',
+    }
   } catch (e) {
     return {
       status: 500,

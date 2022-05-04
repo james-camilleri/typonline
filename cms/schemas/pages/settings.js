@@ -37,5 +37,19 @@ export default {
       fieldset: 'typewriter',
       validation: (Rule) => Rule.required(),
     },
+    {
+      name: 'delaySlow',
+      title: 'Stepper motor delay (slow)',
+      description: 'Stepper motor delay for "slow" rotation,  in microseconds.',
+      type: 'number',
+      fieldset: 'typewriter',
+    },
+    {
+      name: 'delayFast',
+      title: 'Stepper motor delay (fast)',
+      description: 'Stepper motor delay for "fast" rotation,  in microseconds.',
+      type: 'number',
+      fieldset: 'typewriter',
+    },
   ],
 }

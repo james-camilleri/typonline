@@ -41,7 +41,7 @@ export async function post({ request }) {
       })
     }
 
-    return { status: 200 }
+    return { status: response.status }
   } catch (e) {
     return {
       status: 500,

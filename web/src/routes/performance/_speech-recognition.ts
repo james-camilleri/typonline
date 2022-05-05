@@ -16,14 +16,17 @@ export function recogniseSpeech(
 
 export function filterStopWords(text: string) {
   const filtered = text
+    .replace(punctuation, '')
     .split(' ')
     .filter((word) => !stopWords.includes(word))
     .filter((word) => word !== '')
-  // .map((word) => word.toLowerCase())
+    .map((word) => word.toLowerCase())
 
   // Remove duplicates.
   return [...new Set(filtered)]
 }
+
+const punctuation = /[.,!?;:]/
 
 const stopWords = [
   'a',

@@ -47,8 +47,13 @@
   let pendingActionId
   let state: State
   let responses: Response[] = []
+  let generateText
 
-  onMount(() => {
+  onMount(async () => {
+    // We need to import this on mount because
+    // it references `window` on initialisation.
+    generateText = (await import('$lib/ml/generate')).generateText
+
     recogniseSpeech((event: { results: SpeechRecognitionResultList }) => {
       const { results } = event
       const response = results[results.length - 1][0].transcript
@@ -106,6 +111,32 @@
     sendText(question)
   }
 
+  function getRandomIndex(array) {
+    const max = array.length - 1
+    return Math.floor(Math.random() * max)
+  }
+
+  async function generate() {
+    const seeds = responses
+      .map((response) => response.filtered)
+      .map((responses) => responses[getRandomIndex(responses)])
+
+    const generatedText = await seeds.reduce(async (previousLines, seed) => {
+      return previousLines.then(async (lines) => {
+        const generated = await generateText(seed)
+        const nextLine = `${seed} ${generated}`
+        return [...lines, nextLine]
+      })
+    }, Promise.resolve([]))
+
+    console.log('generated text', generatedText)
+
+    const poem = '\n\n' + generatedText.join('\n') + '\n\n'
+
+    console.log(poem)
+    sendText(poem)
+  }
+
   async function onKeyDown(event: KeyboardEvent) {
     if (event.key === 'c' && document.activeElement !== customTextInput) {
       customTextInput.focus()
@@ -142,6 +173,11 @@
 
     if (event.key === 'Escape') {
       await cancel()
+    }
+
+    if (event.key === 'Enter') {
+      await cancel()
+      await generate()
     }
   }
 </script>

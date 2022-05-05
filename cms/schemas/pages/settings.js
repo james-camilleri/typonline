@@ -12,6 +12,11 @@ export default {
       readOnly: true,
     },
     {
+      name: 'ngrokApiKey',
+      title: 'ngrok API key',
+      type: 'string',
+    },
+    {
       name: 'keyMap',
       title: 'DMX key mapping',
       description: 'The DMX channel for each typewriter key. JSON mapping.',

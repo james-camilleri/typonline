@@ -2,7 +2,7 @@
   import { browser } from '$app/env'
   import { onDestroy } from 'svelte'
 
-  const HEARTBEAT_TIMEOUT = 5000
+  const HEARTBEAT_TIMEOUT = 10000
 
   let connected = false
   let disconnectedSeconds = null

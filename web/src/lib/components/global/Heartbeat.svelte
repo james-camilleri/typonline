@@ -5,6 +5,8 @@
   const HEARTBEAT_TIMEOUT = 5000
 
   let connected = false
+  let disconnectedSeconds = null
+  let disconnectedInterval = null
   let heartbeatData = null
 
   async function heartbeat() {
@@ -13,10 +15,20 @@
     if (heartbeat.ok) {
       connected = true
       heartbeatData = await heartbeat.json()
+
+      clearInterval(disconnectedInterval)
+      disconnectedInterval = null
+      disconnectedSeconds = 0
+
       return
     }
 
     connected = false
+    if (!disconnectedInterval) {
+      disconnectedInterval = setInterval(() => {
+        disconnectedSeconds += 1
+      }, 1000)
+    }
   }
 
   if (browser) {
@@ -33,7 +45,9 @@
 >
   <div class="indicator" class:connected />
   <p>{connected ? 'connected' : 'connecting'}</p>
-  {#if heartbeatData}<small>({heartbeatData.version})</small>{/if}
+  {#if connected && heartbeatData}<small>({heartbeatData.version})</small>{/if}
+  {#if !connected && disconnectedSeconds}<small>({disconnectedSeconds}s)</small
+    >{/if}
 </div>
 
 <style>

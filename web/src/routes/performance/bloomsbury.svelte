@@ -168,12 +168,12 @@
 
     if (event.key === 'q') {
       await cancel()
-      sendText('/n')
+      askNextQuestion()
     }
 
-    if (event.key === 'q') {
+    if (event.key === 'n') {
       await cancel()
-      askNextQuestion()
+      sendText('\n')
     }
 
     if (event.key === 'Escape') {

@@ -64,14 +64,14 @@
     })
   })
 
-  function sendText(newText: string) {
+  function sendText(newText: string, savePost = false) {
     text = newText
 
     pendingActionId = setTimeout(() => {
       state = STATE.WAITING
       fetch('/typewriter/type', {
         method: 'POST',
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({ text, savePost }),
       })
         .then((response) => {
           response.ok ? (state = STATE.SUCCESS) : (state = STATE.ERROR)
@@ -134,7 +134,7 @@
     const poem = '\n\n' + generatedText.join('\n') + '\n\n'
 
     console.log(poem)
-    sendText(poem)
+    sendText(poem, true)
   }
 
   async function onKeyDown(event: KeyboardEvent) {

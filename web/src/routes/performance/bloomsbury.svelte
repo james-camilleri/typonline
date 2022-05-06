@@ -2,7 +2,7 @@
   import { get } from '$lib/utils/get'
   import { PAGES } from '$lib/types/pages'
 
-  export const prerender = true
+  // export const prerender = true
 
   export async function load({ fetch }) {
     return {

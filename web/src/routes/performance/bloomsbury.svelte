@@ -168,6 +168,11 @@
 
     if (event.key === 'q') {
       await cancel()
+      sendText('/n')
+    }
+
+    if (event.key === 'q') {
+      await cancel()
       askNextQuestion()
     }
 

@@ -5,7 +5,7 @@ export default {
   fields: [
     {
       name: 'post',
-      type: 'string',
+      type: 'text',
     },
   ],
 }

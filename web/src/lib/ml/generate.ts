@@ -1,9 +1,7 @@
 import ml5 from 'ml5'
 
-import dictionary from './dictionary'
-
 let _rnn
-const length = 50
+const length = 40
 
 async function getRnn() {
   if (_rnn) return _rnn
@@ -17,10 +15,11 @@ async function getRnn() {
 
 export async function generateText(seed: string) {
   const rnn = await getRnn()
-  const text = await rnn.generate({ seed, length })
+  const text: { sample: string } = await rnn.generate({ seed, length })
 
-  // TODO: This filtering is too extreme.
-  const filtered = text.sample.split(' ').filter((word) => dictionary.has(word))
+  // Remove last word, because there's a hard character
+  // and in most cases it truncates the last generated word.
+  const filtered = text.sample.split(' ').slice(0, -2)
 
   return filtered.join(' ')
 }

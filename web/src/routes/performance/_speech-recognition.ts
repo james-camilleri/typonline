@@ -12,6 +12,9 @@ export function recogniseSpeech(
   recognition.lang = 'en-GB'
   recognition.onresult = handler
   recognition.start()
+  recognition.addEventListener('end', () => {
+    recognition.start()
+  })
 }
 
 export function filterStopWords(text: string) {

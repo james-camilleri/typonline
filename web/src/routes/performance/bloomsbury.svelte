@@ -2,8 +2,6 @@
   import { get } from '$lib/utils/get'
   import { PAGES } from '$lib/types/pages'
 
-  // export const prerender = true
-
   export async function load({ fetch }) {
     return {
       props: {
@@ -19,8 +17,6 @@
 
   import shuffle from 'lodash/shuffle.js'
   import { onMount, tick } from 'svelte'
-
-  // import { generateText } from '$lib/ml/generate'
 
   import Title from '$lib/components/global/Title.svelte'
   import Grid from '$lib/components/layout/Grid.svelte'
@@ -128,8 +124,6 @@
         return [...lines, nextLine]
       })
     }, Promise.resolve([]))
-
-    console.log('generated text', generatedText)
 
     const poem = '\n\n' + generatedText.join('\n') + '\n\n'
 

@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "@sanity/client": "^3.3.0",
-    "nodemailer": "^6.7.3"
+    "nodemailer": "^6.7.3",
+    "openai": "^3.0.0"
   },
   "devDependencies": {
     "@beyonk/gdpr-cookie-consent-banner": "^9.0.3",

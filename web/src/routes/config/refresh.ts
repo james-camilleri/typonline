@@ -18,7 +18,7 @@ export async function get() {
     const settings = await client.getDocument('settings')
     const { ngrokUrl } = settings
 
-    const response = await fetch(`${ngrokUrl}/config/refresh`)
+    const response = await fetch(`${ngrokUrl}/refresh`)
     if (response.ok) {
       return { status: 200 }
     }

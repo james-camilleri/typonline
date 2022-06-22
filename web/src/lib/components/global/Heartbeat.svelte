@@ -1,41 +1,12 @@
 <script lang="ts">
-  import { browser } from '$app/env'
-  import { onDestroy } from 'svelte'
+  import {
+    heartbeatData,
+    disconnectedSeconds,
+    HEARTBEAT_TIMEOUT,
+  } from '$lib/connection'
 
-  const HEARTBEAT_TIMEOUT = 10000
-
-  let connected = false
-  let disconnectedSeconds = null
-  let disconnectedInterval = null
-  let heartbeatData = null
-
-  async function heartbeat() {
-    const heartbeat = await fetch('/config/heartbeat')
-
-    if (heartbeat.ok) {
-      connected = true
-      heartbeatData = await heartbeat.json()
-
-      clearInterval(disconnectedInterval)
-      disconnectedInterval = null
-      disconnectedSeconds = 0
-
-      return
-    }
-
-    connected = false
-    if (!disconnectedInterval) {
-      disconnectedInterval = setInterval(() => {
-        disconnectedSeconds += 1
-      }, 1000)
-    }
-  }
-
-  if (browser) {
-    heartbeat()
-    const interval = setInterval(heartbeat, HEARTBEAT_TIMEOUT)
-    onDestroy(() => clearInterval(interval))
-  }
+  let connected
+  $: connected = !!$heartbeatData
 </script>
 
 <div
@@ -45,8 +16,9 @@
 >
   <div class="indicator" class:connected />
   <p>{connected ? 'connected' : 'connecting'}</p>
-  {#if connected && heartbeatData}<small>({heartbeatData.version})</small>{/if}
-  {#if !connected && disconnectedSeconds}<small>({disconnectedSeconds}s)</small
+  {#if connected}<small>({$heartbeatData.version})</small>{/if}
+  {#if !connected && $disconnectedSeconds}<small
+      >({$disconnectedSeconds}s)</small
     >{/if}
 </div>
 

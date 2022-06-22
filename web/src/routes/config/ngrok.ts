@@ -13,6 +13,23 @@ const client = sanityClient({
 })
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
+export async function get() {
+  try {
+    const settings = await client.getDocument('settings')
+
+    return {
+      status: 200,
+      body: settings.ngrokUrl,
+    }
+  } catch (e) {
+    return {
+      status: 500,
+      body: e.message,
+    }
+  }
+}
+
+/** @type {import('@sveltejs/kit').RequestHandler} */
 export async function post({ request }) {
   try {
     const payload = await request.json()

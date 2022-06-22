@@ -23,11 +23,35 @@ export async function getPage(page: PageId, fetch: Fetch): Promise<Page> {
     .then((page) => prefetchImageMetadata(page, CONFIG.SANITY, fetch))
 }
 
+export async function getPhrases(
+  names: string[],
+  fetch: Fetch,
+): Promise<{ [name: string]: string[] }> {
+  const query = encodeURIComponent(
+    `*[_type == "phrases" && name in [${names
+      .map((name) => `"${name}"`)
+      .join()}]]`,
+  )
+
+  const { result } = await fetch(url(query), REQUEST_OPTIONS).then((response) =>
+    response.json(),
+  )
+
+  return result.reduce(
+    (allPhrases, { name, phrases }) => ({
+      ...allPhrases,
+      [name]: phrases,
+    }),
+    {},
+  )
+}
+
 export function getThumbnailUrlFor(source: SanityImageSource): string {
   return imgBuilder.image(source).size(THUMBNAIL_SIZE, THUMBNAIL_SIZE).url()
 }
 
 export const get = {
   page: getPage,
+  phrases: getPhrases,
   thumbnailUrl: getThumbnailUrlFor,
 }

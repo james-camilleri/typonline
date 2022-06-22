@@ -1,18 +1,33 @@
 import S from '@sanity/desk-tool/structure-builder'
-import { RiAsterisk, RiDraftLine, RiSettings2Line } from 'react-icons/ri'
+import {
+  RiAsterisk,
+  RiChat4Line,
+  RiDraftLine,
+  RiSettings2Line,
+} from 'react-icons/ri'
 
 export default () =>
   S.list()
     .title('Content')
     .items([
       S.listItem()
-        .title('Posts')
+        .title('Poems')
         .icon(RiDraftLine)
         .child(
           S.documentList()
-            .title('Posts')
+            .title('Poems')
             .filter('_type == "post"')
             .schemaType('post'),
+        ),
+      S.divider(),
+      S.listItem()
+        .title('Phrases')
+        .icon(RiChat4Line)
+        .child(
+          S.documentList()
+            .title('Phrases')
+            .filter('_type == "phrases"')
+            .schemaType('phrases'),
         ),
       S.divider(),
       S.listItem()

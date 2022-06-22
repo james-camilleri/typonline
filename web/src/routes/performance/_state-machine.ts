@@ -98,7 +98,7 @@ export function create({ greet, ask, acknowledge, generate }) {
         },
         [STATE.COOLDOWN]: {
           after: {
-            [seconds(3)]: {
+            [seconds(30)]: {
               target: STATE.IDLE,
             },
           },

@@ -51,10 +51,9 @@
         type(random(phrases['questions-architecture']))
       },
       acknowledge() {
-        type(random(phrases.acknowledgements))
+        type(random(phrases.acknowledgements) + '\n\n')
       },
       generate() {
-        console.log('generating poem from', responses)
         generatePoem()
         responses = []
       },
@@ -100,8 +99,7 @@
       body: JSON.stringify({ seeds }),
     }).then((response) => response.json())
 
-    console.log(response.poem)
-    type(response.poem, true)
+    type(response.poem + '\n\n', true)
   }
 </script>
 

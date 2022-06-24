@@ -34,13 +34,19 @@
   export let phrases: { [name: string]: string[] }
 
   let responses: Response[] = []
+  let logs: string[] = []
 
   onMount(async () => {
     recogniseSpeech(onRecogniseSpeech)
   })
 
-  onEvent('audience-detected', () => send(EVENT.AUDIENCE_DETECTED))
   onEvent('typing-complete', () => send(EVENT.TYPING_COMPLETE))
+  onEvent('audience-detected', () => {
+    if ($state.value === STATE.IDLE) {
+      log('AUDIENCE DETECTED')
+    }
+    send(EVENT.AUDIENCE_DETECTED)
+  })
 
   const { state, send } = useMachine(
     create({
@@ -49,11 +55,13 @@
       },
       ask() {
         type(random(phrases['questions-architecture']))
+        log('WAITING FOR RESPONSE')
       },
       acknowledge() {
         type(random(phrases.acknowledgements) + '\n\n')
       },
       generate() {
+        log('GENERATING POEM')
         generatePoem()
         responses = []
       },
@@ -67,7 +75,7 @@
   function onRecogniseSpeech(event: { results: SpeechRecognitionResultList }) {
     const { results } = event
     const response = results[results.length - 1][0].transcript
-    console.log('RECOGNISED SPEECH:', response)
+    log(`RECOGNISED SPEECH: "${response}"`)
 
     if ($state.value === STATE.LISTENING) {
       responses = [
@@ -80,11 +88,15 @@
   }
 
   function type(text: string, savePost = false) {
-    console.log('TYPING:', text)
+    log(`TYPING: "${text}"`)
     fetch('/typewriter/type', {
       method: 'POST',
       body: JSON.stringify({ text, savePost }),
     })
+  }
+
+  function log(text: string) {
+    logs = logs.length > 10 ? [...logs.slice(1), text] : [...logs, text]
   }
 
   async function generatePoem() {
@@ -108,6 +120,11 @@
     <div class="main-panel">
       <Title text={CONFIG.GENERAL.siteTitle} subtitle="Here East" />
       {$state.value}
+      <div class="logs">
+        {#each logs as log}
+          <span>{log}</span>
+        {/each}
+      </div>
     </div>
   </Grid>
 </div>
@@ -121,5 +138,11 @@
   .main-panel {
     display: flex;
     flex-direction: column;
+  }
+
+  .logs {
+    display: flex;
+    flex-flow: column;
+    margin-top: var(--lg);
   }
 </style>

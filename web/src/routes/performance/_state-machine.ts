@@ -68,7 +68,7 @@ export function create({ greet, ask, acknowledge, generate }) {
         },
         [STATE.LISTENING]: {
           after: {
-            [seconds(20)]: {
+            [seconds(60)]: {
               target: STATE.IDLE,
             },
           },

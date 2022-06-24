@@ -119,7 +119,7 @@
   <Grid columns={[2, 1, 1]}>
     <div class="main-panel">
       <Title text={CONFIG.GENERAL.siteTitle} subtitle="Here East" />
-      {$state.value} [${responses.length + 1}/3 responses gathered]
+      {$state.value} [{responses.length}/3 responses gathered]
       <div class="logs">
         {#each logs as log}
           <span>{log}</span>

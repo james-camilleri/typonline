@@ -67,6 +67,11 @@ export function create({ greet, ask, acknowledge, generate }) {
           },
         },
         [STATE.LISTENING]: {
+          after: {
+            [seconds(20)]: {
+              target: STATE.IDLE,
+            },
+          },
           on: {
             [EVENT.AUDIO_DETECTED]: {
               target: STATE.ACKNOWLEDGING,

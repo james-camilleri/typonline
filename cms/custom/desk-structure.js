@@ -29,16 +29,16 @@ export default () =>
             .filter('_type == "phrases"')
             .schemaType('phrases'),
         ),
-      S.divider(),
-      S.listItem()
-        .title('Performance')
-        .icon(RiAsterisk)
-        .child(
-          S.document()
-            .title('Performance')
-            .schemaType('performance')
-            .documentId('performance'),
-        ),
+      // S.divider(),
+      // S.listItem()
+      //   .title('Performance')
+      //   .icon(RiAsterisk)
+      //   .child(
+      //     S.document()
+      //       .title('Performance')
+      //       .schemaType('performance')
+      //       .documentId('performance'),
+      //   ),
       S.listItem()
         .title('Settings')
         .icon(RiSettings2Line)

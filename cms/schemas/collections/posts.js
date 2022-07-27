@@ -4,18 +4,43 @@ export default {
   title: 'Posts',
   fields: [
     {
-      name: 'post',
+      name: 'conversation',
+      type: 'array',
+      of: [
+        {
+          name: 'questionAndAnswer',
+          type: 'object',
+          fields: [
+            { name: 'question', type: 'string' },
+            { name: 'answer', type: 'string' },
+          ],
+        },
+        {
+          name: 'phrase',
+          type: 'object',
+          fields: [{ name: 'phrase', type: 'string' }],
+        },
+      ],
+      readonly: true,
+    },
+    {
+      name: 'poem',
       type: 'text',
+    },
+    {
+      name: 'public',
+      type: 'boolean',
+      initialValue: false,
     },
   ],
   preview: {
     select: {
-      post: 'post',
+      poem: 'poem',
       date: '_createdAt',
     },
-    prepare({ post, date }) {
+    prepare({ poem, date }) {
       return {
-        title: post.trim(),
+        title: poem.trim(),
         subtitle: new Date(date).toLocaleString(),
       }
     },

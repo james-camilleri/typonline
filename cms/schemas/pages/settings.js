@@ -33,37 +33,5 @@ export default {
       fieldset: 'typewriter',
       validation: (Rule) => Rule.required().min(10),
     },
-    {
-      name: 'carriageReturnSteps',
-      title: 'Carriage return motor rotation (steps)',
-      description:
-        'Stepper motor steps required for a full pull of the carriage. (This only needs to be modified if the typewriter is changed.)',
-      type: 'number',
-      fieldset: 'typewriter',
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      name: 'newlineRotationSteps',
-      title: 'Newline motor rotation (steps)',
-      description:
-        'Stepper motor steps required for pulling the newline lever. (This only needs to be modified if the typewriter is changed.)',
-      type: 'number',
-      fieldset: 'typewriter',
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      name: 'delaySlow',
-      title: 'Stepper motor delay (slow)',
-      description: 'Stepper motor delay for "slow" rotation,  in microseconds.',
-      type: 'number',
-      fieldset: 'typewriter',
-    },
-    {
-      name: 'delayFast',
-      title: 'Stepper motor delay (fast)',
-      description: 'Stepper motor delay for "fast" rotation,  in microseconds.',
-      type: 'number',
-      fieldset: 'typewriter',
-    },
   ],
 }

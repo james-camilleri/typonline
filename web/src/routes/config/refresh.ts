@@ -13,7 +13,7 @@ const client = sanityClient({
 })
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function get() {
+export async function GET() {
   try {
     const settings = await client.getDocument('settings')
     const { ngrokUrl } = settings

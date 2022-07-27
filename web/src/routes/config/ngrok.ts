@@ -13,7 +13,7 @@ const client = sanityClient({
 })
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function get() {
+export async function GET() {
   try {
     const settings = await client.getDocument('settings')
 
@@ -30,7 +30,7 @@ export async function get() {
 }
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
-export async function post({ request }) {
+export async function POST({ request }) {
   try {
     const payload = await request.json()
     await client.patch('settings').set({ ngrokUrl: payload.url }).commit()

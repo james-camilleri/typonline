@@ -87,7 +87,7 @@ export function create({ greet, ask, acknowledge, generate }) {
                 cond: 'shouldGeneratePoem',
                 actions: 'generate',
               },
-              { target: STATE.COOLDOWN },
+              { target: STATE.ASKING },
             ],
           },
         },

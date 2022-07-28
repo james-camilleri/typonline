@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
-  import type { LoadInput } from '@sveltejs/kit'
+  import type { Load } from '@sveltejs/kit'
 
-  export const load = async ({ url }: LoadInput) => ({ props: { url } })
+  export const load: Load = async ({ url }) => ({ props: { url } })
 </script>
 
 <script lang="ts">

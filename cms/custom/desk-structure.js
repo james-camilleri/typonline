@@ -2,6 +2,7 @@ import S from '@sanity/desk-tool/structure-builder'
 import {
   RiAsterisk,
   RiChat4Line,
+  RiDownload2Line,
   RiDraftLine,
   RiSettings2Line,
 } from 'react-icons/ri'
@@ -47,5 +48,15 @@ export default () =>
             .title('Settings')
             .schemaType('settings')
             .documentId('settings'),
+        ),
+      S.divider(),
+      S.listItem()
+        .title('Feedback')
+        .icon(RiDownload2Line)
+        .child(
+          S.documentList()
+            .title('Feedback')
+            .filter('_type == "submissionFeedback"')
+            .schemaType('submissionFeedback'),
         ),
     ])

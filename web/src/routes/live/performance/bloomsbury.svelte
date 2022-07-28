@@ -65,7 +65,7 @@
 
     pendingActionId = setTimeout(() => {
       state = STATE.WAITING
-      fetch('/typewriter/type', {
+      fetch('/api/typewriter/type', {
         method: 'POST',
         body: JSON.stringify({ text, savePost }),
       })

@@ -22,7 +22,7 @@
 
     state = STATE.WAITING
     try {
-      const response = await fetch('/typewriter/type', {
+      const response = await fetch('/api/typewriter/type', {
         method: 'POST',
         body: JSON.stringify({ text }),
       })

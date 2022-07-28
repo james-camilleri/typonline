@@ -89,7 +89,7 @@
 
   function type(text: string, savePost = false) {
     log(`TYPING: "${text}"`)
-    fetch('/typewriter/type', {
+    fetch('/api/typewriter/type', {
       method: 'POST',
       body: JSON.stringify({ text, savePost }),
     })
@@ -106,7 +106,7 @@
 
     if (seeds.length === 0) return
 
-    const response = await fetch('/generate/poem', {
+    const response = await fetch('/api/generate/poem', {
       method: 'POST',
       body: JSON.stringify({ seeds }),
     }).then((response) => response.json())

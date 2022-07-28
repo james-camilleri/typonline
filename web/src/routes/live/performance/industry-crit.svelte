@@ -61,7 +61,7 @@
 
     pendingActionId = setTimeout(() => {
       state = STATE.WAITING
-      fetch('/typewriter/type', {
+      fetch('/api/typewriter/type', {
         method: 'POST',
         body: JSON.stringify({ text, savePost }),
       })
@@ -116,7 +116,7 @@
     if (seeds.length === 0) return
     console.log('seeds', seeds)
 
-    const response = await fetch('/generate/poem', {
+    const response = await fetch('/api/generate/poem', {
       method: 'POST',
       body: JSON.stringify({ seeds }),
     }).then((response) => response.json())

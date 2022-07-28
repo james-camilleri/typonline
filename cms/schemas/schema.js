@@ -4,10 +4,18 @@ import createSchema from 'part:@sanity/base/schema-creator'
 
 import phrases from './collections/phrases.js'
 import post from './collections/posts.js'
+import submissionFeedback from './form-submissions/feedback.js'
 import performance from './pages/performance.js'
 import settings from './pages/settings.js'
 
 export default createSchema({
   name: 'default',
-  types: schemaTypes.concat([performance, settings, post, phrases, webImage]),
+  types: schemaTypes.concat([
+    performance,
+    phrases,
+    post,
+    settings,
+    submissionFeedback,
+    webImage,
+  ]),
 })

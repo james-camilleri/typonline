@@ -16,7 +16,7 @@ export default {
       readonly: true,
     },
     {
-      name: 'feedback',
+      name: 'message',
       type: 'text',
       readonly: true,
     },
@@ -25,11 +25,11 @@ export default {
   preview: {
     select: {
       createdAt: '_createdAt',
-      feedback: 'feedback',
+      message: 'message',
     },
-    prepare({ feedback, createdAt }) {
+    prepare({ message, createdAt }) {
       return {
-        title: feedback.slice(0, 255),
+        title: message.slice(0, 255),
         subtitle: new Date(createdAt).toLocaleString(),
       }
     },

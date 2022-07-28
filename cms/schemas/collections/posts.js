@@ -8,20 +8,25 @@ export default {
       type: 'array',
       of: [
         {
-          name: 'questionAndAnswer',
-          type: 'object',
-          fields: [
-            { name: 'question', type: 'string' },
-            { name: 'answer', type: 'string' },
-          ],
-        },
-        {
           name: 'phrase',
           type: 'object',
-          fields: [{ name: 'phrase', type: 'string' }],
+          fields: [
+            { name: 'entity', type: 'string' },
+            { name: 'text', type: 'string' },
+          ],
         },
       ],
       readonly: true,
+    },
+    {
+      name: 'seeds',
+      type: 'array',
+      of: [
+        {
+          type: 'string',
+        },
+      ],
+      layout: 'tags',
     },
     {
       name: 'poem',

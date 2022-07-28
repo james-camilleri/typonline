@@ -11,18 +11,18 @@ export default () =>
     .title('Content')
     .items([
       S.listItem()
-        .title('Poems')
-        .icon(RiDraftLine)
+        .title('Conversations')
+        .icon(RiChat4Line)
         .child(
           S.documentList()
-            .title('Poems')
+            .title('Conversations')
             .filter('_type == "post"')
             .schemaType('post'),
         ),
       S.divider(),
       S.listItem()
         .title('Phrases')
-        .icon(RiChat4Line)
+        .icon(RiDraftLine)
         .child(
           S.documentList()
             .title('Phrases')

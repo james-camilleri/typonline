@@ -7,19 +7,27 @@
 <script lang="ts">
   import '../styles/global.scss'
 
+  import Title from '$lib/components/global/Title.svelte'
   import Footer from '$lib/components/global/Footer.svelte'
   import PageTransition from '$lib/components/transition/PageTransition.svelte'
+
+  import CONFIG from '$lib/config'
 
   export let url: URL
 </script>
 
 <div class="grid">
+  <header>
+    <Title text={CONFIG.GENERAL.siteTitle} />
+  </header>
   <main>
     <PageTransition {url}>
       <slot />
     </PageTransition>
   </main>
-  <Footer />
+  {#if url.pathname.includes('live')}
+    <Footer />
+  {/if}
 </div>
 
 <style lang="scss">
@@ -27,14 +35,8 @@
 
   .grid {
     display: grid;
-    grid-template-rows: 1fr auto;
-    height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-
-  main {
-    position: relative;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
     margin: var(--md) var(--gutter) 0;
 
     @media (min-width: breakpoints.$md) {

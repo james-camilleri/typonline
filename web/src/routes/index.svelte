@@ -10,7 +10,6 @@
   import CONFIG from '$lib/config'
 </script>
 
-<Title text={CONFIG.GENERAL.siteTitle} />
 <Grid>
   <p>(coming soon)</p>
   <Transition order={0} />

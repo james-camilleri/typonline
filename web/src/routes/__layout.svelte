@@ -19,6 +19,21 @@
 <div class="grid">
   <header>
     <Title text={CONFIG.GENERAL.siteTitle} />
+    {#if !url.pathname.includes('live')}
+      <nav>
+        <ul>
+          <li>
+            <a href="/">home</a>
+          </li>
+          <li>
+            <a href="/about">about</a>
+          </li>
+          <li>
+            <a href="/feedback">feedback</a>
+          </li>
+        </ul>
+      </nav>
+    {/if}
   </header>
   <main>
     <PageTransition {url}>
@@ -41,6 +56,51 @@
 
     @media (min-width: breakpoints.$md) {
       margin: 0 var(--xxl);
+    }
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--md);
+
+    @media (min-width: breakpoints.$sm) {
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: var(--xl);
+    }
+  }
+
+  nav {
+    ul {
+      display: flex;
+      margin: 0;
+      text-align: right;
+
+      @media (min-width: breakpoints.$sm) {
+        flex-direction: column;
+      }
+    }
+
+    li {
+      margin: var(--xs);
+    }
+
+    a {
+      font-weight: bold;
+      color: var(--dark);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    a:visited {
+      color: var(--dark);
+    }
+
+    a:hover {
+      color: var(--primary);
     }
   }
 </style>

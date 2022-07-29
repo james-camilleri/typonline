@@ -51,12 +51,18 @@
   .grid {
     display: grid;
     grid-template-rows: auto 1fr auto;
-    min-height: 100vh;
-    margin: var(--md) var(--gutter) 0;
+    height: 100vh;
+    padding: var(--md) var(--gutter) 0;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     @media (min-width: breakpoints.$md) {
       margin: 0 var(--xxl);
     }
+  }
+
+  main {
+    position: relative;
   }
 
   header {

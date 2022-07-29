@@ -14,6 +14,11 @@ export default {
             { name: 'entity', type: 'string' },
             { name: 'text', type: 'string' },
           ],
+          preview: {
+            select: {
+              title: 'text',
+            },
+          },
         },
       ],
       readonly: true,

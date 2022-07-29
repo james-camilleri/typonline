@@ -89,6 +89,12 @@
 </FormGroup>
 
 <style lang="scss">
+  label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   textarea {
     max-height: 200px;
   }
@@ -111,7 +117,7 @@
   .optional {
     padding: 0.1rem 0.3rem;
     margin-inline-start: var(--xs);
-    font-size: 0.8em;
+    font-size: 0.6em;
     color: var(--background);
     text-transform: uppercase;
     background: var(--neutral);

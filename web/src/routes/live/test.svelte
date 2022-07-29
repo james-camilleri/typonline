@@ -41,14 +41,15 @@
   }
 </script>
 
-<Title text={CONFIG.GENERAL.siteTitle} />
 <Grid>
   <Transition order={0}>
-    <p>Use the textbox below to test the automated typewriter.</p>
-  </Transition>
-  <Transition order={1}>
     <Grid>
-      <Input name="text" type="textarea" hideLabel bind:value={text} />
+      <Input
+        name="test-text"
+        type="textarea"
+        label="typewriter test text"
+        bind:value={text}
+      />
       <StateButton
         on:click={submitText}
         {state}

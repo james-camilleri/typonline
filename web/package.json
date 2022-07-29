@@ -5,7 +5,7 @@
   "scripts": {
     "start": "env-cmd vite dev --host",
     "dev": "env-cmd vite dev",
-    "build": "svelte-kit build",
+    "build": "vite build",
     "preview": "env-cmd svelte-kit preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",

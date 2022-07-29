@@ -18,6 +18,7 @@
 
   import { onMount } from 'svelte'
   import { useMachine } from '@xstate/svelte'
+  import { nanoid } from 'nanoid'
 
   import { onEvent } from '$lib/connection'
   import Grid from '$lib/components/layout/Grid.svelte'
@@ -87,7 +88,11 @@
       ]
     }
 
-    post.conversation.push({ entity: 'audience', text: response })
+    post.conversation.push({
+      _key: nanoid(),
+      entity: 'audience',
+      text: response,
+    })
 
     send(EVENT.AUDIO_DETECTED)
   }

@@ -62,7 +62,7 @@
     }
 
     @media (min-width: breakpoints.$md) {
-      padding: var(--md) var(--xxl);
+      padding: var(--md) 0;
     }
   }
 

@@ -29,9 +29,7 @@
 {/if}
 
 <style lang="scss">
-  h1 {
-    margin-bottom: var(--xl);
-  }
+  @use '../../../styles/breakpoints';
 
   h2 {
     // Remove default (large) spacing before subtitle.

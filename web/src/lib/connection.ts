@@ -17,8 +17,15 @@ export function onEvent(event: string, handler: EventHandler) {
   handlers.set(event, handlersForEvent)
 }
 
+export async function broadcast(payload: any) {
+  await fetch('/api/typewriter/broadcast', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+}
+
 async function heartbeat() {
-  const heartbeat = await fetch('/config/heartbeat')
+  const heartbeat = await fetch('/api/typewriter/heartbeat')
 
   if (heartbeat.ok) {
     if (!get(heartbeatData)) {
@@ -42,7 +49,9 @@ async function heartbeat() {
 }
 
 async function initialiseWebSocket() {
-  const piUrl = await fetch('/config/ngrok').then((response) => response.text())
+  const piUrl = await fetch('/api/config/ngrok').then((response) =>
+    response.text(),
+  )
   const webSocket = new WebSocket(piUrl.replace('http', 'ws'))
   webSocket.onmessage = (message) => {
     const { type, payload } = JSON.parse(message.data)

@@ -5,13 +5,11 @@
 <script lang="ts">
   import type { State } from '$lib/components/form/StateButton.svelte'
 
-  import Title from '$lib/components/global/Title.svelte'
   import Grid from '$lib/components/layout/Grid.svelte'
   import Transition from '$lib/components/transition/Transition.svelte'
   import Input from '$lib/components/form/Input.svelte'
   import StateButton, { STATE } from '$lib/components/form/StateButton.svelte'
 
-  import CONFIG from '$lib/config'
   const RESET_TIMEOUT = 5000
 
   let text = ''

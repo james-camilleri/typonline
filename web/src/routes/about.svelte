@@ -5,14 +5,16 @@
   AI software, it writes and creates poetry and text in a dialogue with its
   human audience.
 </p>
-<iframe
-  src="https://www.youtube.com/embed/5LoYcGrAqkc"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen
-  style="width: 100%; aspect-ratio: 16/9;"
-/>
+<p>
+  <iframe
+    src="https://www.youtube.com/embed/5LoYcGrAqkc"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+    style="width: 100%; aspect-ratio: 16/9;"
+  />
+</p>
 <p>
   The mechanical typewriter is an anachronism, relegated to a bygone era, and
   yet is still a potent and recognised symbol of art and literature, of

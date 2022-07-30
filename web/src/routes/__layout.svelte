@@ -107,6 +107,7 @@
 
     a:hover {
       color: var(--primary);
+      background: none;
     }
   }
 </style>

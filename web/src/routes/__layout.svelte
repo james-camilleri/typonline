@@ -25,9 +25,9 @@
           <li>
             <a href="/">home</a>
           </li>
-          <!-- <li>
+          <li>
             <a href="/about">about</a>
-          </li> -->
+          </li>
           <li>
             <a href="/feedback">feedback</a>
           </li>

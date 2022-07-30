@@ -57,7 +57,7 @@
     overflow-y: auto;
 
     @media (min-width: breakpoints.$md) {
-      padding: 0 var(--xxl);
+      padding: 0 var(--xxl) var(--md);
     }
   }
 

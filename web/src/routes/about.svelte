@@ -12,7 +12,7 @@
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen
-    style="width: 100%; aspect-ratio: 16/9;"
+    style="width: 100%; aspect-ratio: 16/9; border-radius: var(--border-radius);"
   />
 </p>
 <p>

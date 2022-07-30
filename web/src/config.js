@@ -4,7 +4,7 @@ export default {
   },
 
   BREAKPOINTS: {
-    sm: '30em',
+    sm: '50em',
     md: '70em',
     lg: '100em',
   },

@@ -25,9 +25,9 @@
           <li>
             <a href="/">home</a>
           </li>
-          <li>
+          <!-- <li>
             <a href="/about">about</a>
-          </li>
+          </li> -->
           <li>
             <a href="/feedback">feedback</a>
           </li>
@@ -52,7 +52,7 @@
     display: grid;
     grid-template-rows: auto 1fr auto;
     height: 100vh;
-    padding: var(--md) var(--gutter) 0;
+    padding: var(--md) var(--gutter) var(--md);
     overflow-x: hidden;
     overflow-y: auto;
 

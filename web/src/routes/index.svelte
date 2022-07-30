@@ -23,6 +23,19 @@
 </script>
 
 <Grid>
+  <div>
+    <p>
+      Typo is an interactive experience with a vintage typewriter that has a
+      life of its own. Animated by hidden robotics and artificial intelligence,
+      it writes poetry through a dialogue with its human audience.
+    </p>
+    {#if conversations.length > 0}
+      <p>
+        Below are some of the more memorable conversations the typewriter has
+        had with its audiences.
+      </p>
+    {/if}
+  </div>
   {#each conversations as conversation, i}
     <Transition order={i}>
       <Post content={conversation} />

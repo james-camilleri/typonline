@@ -11,7 +11,7 @@
   .poem {
     padding: var(--sm);
     word-wrap: normal;
-    white-space: pre;
+    white-space: pre-wrap;
     background: var(--secondary);
   }
 

@@ -130,7 +130,7 @@
     type(response.poem + '\n\n', false)
     post.poem = response.poem
 
-    await fetch('/api/conversations', {
+    await fetch('/api/conversations/post', {
       method: 'POST',
       body: JSON.stringify(post),
     }).then((response) => response.json())

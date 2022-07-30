@@ -50,3 +50,11 @@
     href="mailto:evinakat2@hotmail.com">evinakat2@hotmail.com</a
   >)
 </p>
+
+<h2>the technology</h2>
+<p>
+  Typo is open source! You can check out the code for the Raspberry-Pi-powered
+  mechanics <a href="https://github.com/james-camilleri/typewriter-dmx">here</a
+  >, and the code for the web platform and APIs
+  <a href="https://github.com/james-camilleri/typonline">here.</a>
+</p>

@@ -101,7 +101,7 @@
     log(`TYPING: "${text}"`)
 
     if (addToConversation) {
-      post.conversation.push({ entity: 'typewriter', text })
+      post.conversation.push({ _key: nanoid(), entity: 'typewriter', text })
     }
 
     fetch('/api/typewriter/type', {

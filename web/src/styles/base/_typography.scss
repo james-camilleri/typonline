@@ -96,3 +96,13 @@ h1 {
     overflow-wrap: anywhere;
   }
 }
+
+h2 {
+  font-size: var(--md);
+
+  @media (max-width: breakpoints.$sm) {
+    font-size: var(--h2-font-size);
+
+    overflow-wrap: anywhere;
+  } 
+}

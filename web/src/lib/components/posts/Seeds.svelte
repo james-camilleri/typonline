@@ -15,10 +15,6 @@
 </div>
 
 <style lang="scss">
-  .wrapper {
-    margin-top: var(--lg);
-  }
-
   .annotation {
     font-size: var(--sm);
     font-weight: bold;

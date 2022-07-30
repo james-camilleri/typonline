@@ -1,6 +1,4 @@
 <script context="module">
-  export const prerender = true
-
   export async function load({ fetch }) {
     const url = '/api/conversations'
     const response = await fetch(url)

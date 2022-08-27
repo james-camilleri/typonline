@@ -62,4 +62,16 @@ async function initialiseWebSocket() {
 if (browser) {
   heartbeat()
   setInterval(heartbeat, HEARTBEAT_TIMEOUT)
+
+  const levels = {
+    ERROR: 'error',
+    WARNING: 'warn',
+    INFO: 'info',
+    DEBUG: 'debug',
+  }
+
+  onEvent('log', (log) => {
+    const [_, level, text] = log.match(/\[(\w+)\]\s(.*)/)
+    console[levels[level]](text)
+  })
 }

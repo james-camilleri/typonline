@@ -24,7 +24,7 @@ export async function POST({ request }) {
     const { text, savePost } = payload
 
     // Push text to typewriter.
-    const response = await fetch(ngrokUrl, {
+    const response = await fetch(`${ngrokUrl}/type`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

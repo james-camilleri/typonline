@@ -9,54 +9,119 @@
   import Transition from '$lib/components/transition/Transition.svelte'
   import Input from '$lib/components/form/Input.svelte'
   import StateButton, { STATE } from '$lib/components/form/StateButton.svelte'
+  import { browser } from '$app/env'
+  import { COLOUR, setStatusLight } from './_status-light'
+  import { tick } from 'svelte'
 
   const RESET_TIMEOUT = 5000
 
   let text = ''
-  let state: State = STATE.IDLE
+  let eventName = ''
+  let eventBody = ''
+  let textState: State = STATE.IDLE
+  let eventState: State = STATE.IDLE
+
+  if (browser) {
+    setStatusLight(COLOUR.WHITE)
+  }
 
   async function submitText() {
     if (text === '') return
 
-    state = STATE.WAITING
+    textState = STATE.WAITING
     try {
       const response = await fetch('/api/typewriter/type', {
         method: 'POST',
         body: JSON.stringify({ text }),
       })
 
-      state = response.ok ? STATE.SUCCESS : STATE.ERROR
+      textState = response.ok ? STATE.SUCCESS : STATE.ERROR
       if (response.ok) {
         text = ''
       }
     } catch (e) {
-      state = STATE.ERROR
+      textState = STATE.ERROR
     }
 
     setTimeout(() => {
-      state = STATE.IDLE
+      textState = STATE.IDLE
+    }, RESET_TIMEOUT)
+  }
+
+  async function submitEvent() {
+    if (eventName === '') return
+
+    eventState = STATE.WAITING
+    try {
+      const response = await fetch('/api/typewriter/event', {
+        method: 'POST',
+        body: JSON.stringify({
+          type: eventName,
+          data: JSON.parse(eventBody),
+        }),
+      })
+
+      eventState = response.ok ? STATE.SUCCESS : STATE.ERROR
+      if (response.ok) {
+        eventName = ''
+        eventBody = ''
+      }
+
+      console.log('response', response)
+    } catch (e) {
+      console.error('fak')
+      console.error(e)
+      eventState = STATE.ERROR
+    }
+
+    setTimeout(() => {
+      eventState = STATE.IDLE
     }, RESET_TIMEOUT)
   }
 </script>
 
 <Grid>
   <Transition order={0}>
-    <Grid>
-      <Input
-        name="test-text"
-        type="textarea"
-        label="typewriter test text"
-        bind:value={text}
-      />
-      <StateButton
-        on:click={submitText}
-        {state}
-        messages={{
-          [STATE.WAITING]: 'Sending...',
-          [STATE.ERROR]: 'Boom! Something broke.',
-          [STATE.SUCCESS]: 'Clickety clack!',
-        }}>Send</StateButton
-      >
+    <Grid columns={2}>
+      <div>
+        <Grid>
+          <Input
+            name="test-text"
+            type="textarea"
+            label="typewriter test text"
+            bind:value={text}
+          />
+          <StateButton
+            on:click={submitText}
+            state={textState}
+            messages={{
+              [STATE.WAITING]: 'Sending...',
+              [STATE.ERROR]: 'Boom! Something broke.',
+              [STATE.SUCCESS]: 'Clickety clack!',
+            }}>Send</StateButton
+          >
+        </Grid>
+      </div>
+      <div>
+        <Grid>
+          <Input name="test-event" label="event name" bind:value={eventName} />
+          <Input
+            name="test-event-body"
+            type="textarea"
+            label="event body (json)"
+            bind:value={eventBody}
+          />
+          <StateButton
+            on:click={submitEvent}
+            state={eventState}
+            messages={{
+              [STATE.WAITING]: 'Sending...',
+              [STATE.ERROR]: 'Boom! Something broke.',
+              [STATE.SUCCESS]: 'Clickety clack!',
+            }}>Send</StateButton
+          >
+        </Grid>
+      </div>
     </Grid>
   </Transition>
 </Grid>

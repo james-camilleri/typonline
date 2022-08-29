@@ -1,3 +1,5 @@
+import { fireEvent } from '$lib/connection'
+
 interface Colour {
   r: number
   g: number
@@ -12,12 +14,9 @@ export const COLOUR: Record<string, Colour> = {
   WHITE: { r: 255, g: 255, b: 255 },
 } as const
 
-export function setStatusLight(colour: Colour) {
-  fetch('/api/typewriter/event', {
-    method: 'POST',
-    body: JSON.stringify({
-      type: 'status-light',
-      data: colour,
-    }),
+export async function setStatusLight(colour: Colour) {
+  fireEvent({
+    type: 'status-light',
+    data: colour,
   })
 }

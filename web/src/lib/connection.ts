@@ -24,6 +24,14 @@ export async function broadcast(payload: any) {
   })
 }
 
+export async function fireEvent(event: { type: string; data: any }) {
+  console.info(`Event fired (control panel): "${event.type}"`)
+  fetch('/api/typewriter/event', {
+    method: 'POST',
+    body: JSON.stringify(event),
+  })
+}
+
 async function heartbeat() {
   const heartbeat = await fetch('/api/typewriter/heartbeat')
 
@@ -55,6 +63,9 @@ async function initialiseWebSocket() {
   const webSocket = new WebSocket(piUrl.replace('http', 'ws'))
   webSocket.onmessage = (message) => {
     const { type, payload } = JSON.parse(message.data)
+    if (type !== 'log') {
+      console.info(`Event received (control panel): "${type}"`)
+    }
     handlers.get(type)?.forEach((listener) => listener(payload))
   }
 }

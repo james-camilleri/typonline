@@ -12,6 +12,7 @@
   import { browser } from '$app/env'
   import { COLOUR, setStatusLight } from './_status-light'
   import { tick } from 'svelte'
+  import { fireEvent } from '$lib/connection'
 
   const RESET_TIMEOUT = 5000
 
@@ -53,12 +54,9 @@
 
     eventState = STATE.WAITING
     try {
-      const response = await fetch('/api/typewriter/event', {
-        method: 'POST',
-        body: JSON.stringify({
-          type: eventName,
-          data: JSON.parse(eventBody),
-        }),
+      const response = await fireEvent({
+        type: eventName,
+        data: JSON.parse(eventBody),
       })
 
       eventState = response.ok ? STATE.SUCCESS : STATE.ERROR
@@ -66,8 +64,6 @@
         eventName = ''
         eventBody = ''
       }
-
-      console.log('response', response)
     } catch (e) {
       console.error('fak')
       console.error(e)

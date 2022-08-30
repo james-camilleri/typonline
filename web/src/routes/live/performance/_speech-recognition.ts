@@ -4,13 +4,15 @@ export interface Response {
 }
 
 export function recogniseSpeech(
-  handler: (event: { results: SpeechRecognitionResultList }) => void,
+  onResult: (event: { results: SpeechRecognitionResultList }) => void,
+  onDetectSpeech: () => void,
 ) {
   // @ts-expect-error - The Speech Recognition object is webkit-specific.
   const recognition = new webkitSpeechRecognition()
   recognition.continuous = true
   recognition.lang = 'en-GB'
-  recognition.onresult = handler
+  recognition.onresult = onResult
+  recognition.onspeechstart = onDetectSpeech
   recognition.start()
   recognition.addEventListener('end', () => {
     recognition.start()

@@ -84,7 +84,7 @@
       ]
     }
 
-    send(EVENT.AUDIO_DETECTED)
+    send(EVENT.SPEECH_DETECTED)
   }
 
   function type(text: string, savePost = false) {

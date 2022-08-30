@@ -14,7 +14,6 @@ const client = sanityClient({
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function POST({ request }) {
-  console.log(request)
   try {
     const [settings, payload] = await Promise.all([
       client.getDocument('settings'),

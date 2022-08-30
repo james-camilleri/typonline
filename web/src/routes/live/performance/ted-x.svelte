@@ -94,7 +94,7 @@
       text: response,
     })
 
-    send(EVENT.AUDIO_DETECTED)
+    send(EVENT.SPEECH_DETECTED)
   }
 
   function type(text: string, addToConversation = true) {

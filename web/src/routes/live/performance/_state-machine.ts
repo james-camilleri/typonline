@@ -1,11 +1,15 @@
 import { assign, createMachine } from 'xstate'
 
+import { COLOUR } from '../_status-light'
+
 export enum STATE {
   IDLE = 'idle',
   GREETING = 'greeting',
   ASKING = 'asking',
+  AWAITING_RESPONSE = 'awaiting-response',
   LISTENING = 'listening',
   ACKNOWLEDGING = 'acknowledging',
+  PROCESSING_AUDIO = 'processing-audio',
   WAITING = 'waiting',
   WRITING_POEM = 'writing-poem',
   COOLDOWN = 'cooldown',
@@ -14,23 +18,29 @@ export enum STATE {
 export enum EVENT {
   AUDIENCE_DETECTED = 'audience-detected',
   TYPING_COMPLETE = 'typing-complete',
-  AUDIO_DETECTED = 'audio-detected',
+  SPEECH_DETECTED = 'speech-detected',
+  SPEECH_RECOGNISED = 'speech-recognised',
+  BUTTON_DOWN = 'button-down',
+  BUTTON_UP = 'button-up',
 }
 
 function seconds(n: number) {
   return n * 1000
 }
 
-export function create({ greet, ask, acknowledge, generate }) {
+export function create({ greet, ask, acknowledge, generate, setStatusLight }) {
   return createMachine(
     {
       initial: STATE.IDLE,
       id: 'typo',
       context: {
         answers: 0,
+        speechDetected: false,
+        speechRecognised: false,
       },
       states: {
         [STATE.IDLE]: {
+          entry: 'indicateStatusIdle',
           on: {
             [EVENT.AUDIENCE_DETECTED]: {
               target: STATE.GREETING,
@@ -39,6 +49,7 @@ export function create({ greet, ask, acknowledge, generate }) {
           },
         },
         [STATE.GREETING]: {
+          entry: 'indicateStatusActive',
           on: {
             [EVENT.TYPING_COMPLETE]: {
               target: STATE.WAITING,
@@ -53,33 +64,77 @@ export function create({ greet, ask, acknowledge, generate }) {
             },
           },
           on: {
-            [EVENT.AUDIO_DETECTED]: {
+            [EVENT.SPEECH_DETECTED]: {
               target: STATE.ASKING,
               actions: 'ask',
             },
           },
         },
         [STATE.ASKING]: {
+          entry: assign({
+            speechDetected: false,
+            speechRecognised: false,
+          }),
           on: {
             [EVENT.TYPING_COMPLETE]: {
-              target: STATE.LISTENING,
+              target: STATE.AWAITING_RESPONSE,
             },
           },
         },
-        [STATE.LISTENING]: {
+        [STATE.AWAITING_RESPONSE]: {
+          entry: 'indicateStatusAwaitingResponse',
+          on: {
+            [EVENT.BUTTON_DOWN]: {
+              target: STATE.LISTENING,
+            },
+          },
           after: {
             [seconds(60)]: {
               target: STATE.IDLE,
             },
           },
+        },
+        [STATE.LISTENING]: {
+          entry: 'indicateStatusListening',
           on: {
-            [EVENT.AUDIO_DETECTED]: {
+            [EVENT.BUTTON_UP]: [
+              {
+                target: STATE.ACKNOWLEDGING,
+                cond: 'speechRecognised',
+              },
+              {
+                target: STATE.PROCESSING_AUDIO,
+                cond: 'speechDetected',
+              },
+              {
+                target: STATE.AWAITING_RESPONSE,
+              },
+            ],
+            [EVENT.SPEECH_DETECTED]: {
+              target: STATE.LISTENING,
+              actions: 'speechDetected',
+            },
+            [EVENT.SPEECH_RECOGNISED]: {
+              target: STATE.LISTENING,
+              actions: 'speechRecognised',
+            },
+          },
+        },
+        [STATE.PROCESSING_AUDIO]: {
+          entry: 'indicateStatusProcessingAudio',
+          on: {
+            [EVENT.SPEECH_RECOGNISED]: {
               target: STATE.ACKNOWLEDGING,
-              actions: ['acknowledge', 'countAnswer'],
+            },
+            after: {
+              [seconds(5)]: {
+                target: STATE.AWAITING_RESPONSE,
+              },
             },
           },
         },
         [STATE.ACKNOWLEDGING]: {
+          entry: ['indicateStatusActive', 'acknowledge', 'countAnswer'],
           on: {
             [EVENT.TYPING_COMPLETE]: [
               {
@@ -122,9 +177,25 @@ export function create({ greet, ask, acknowledge, generate }) {
         countAnswer: assign({
           answers: (context: any) => context.answers + 1,
         }),
+        speechDetected: assign({
+          speechDetected: true,
+        }),
+        speechRecognised: assign({
+          speechRecognised: true,
+        }),
+        indicateStatusIdle: () => setStatusLight(COLOUR.WHITE, COLOUR.GREY),
+        // indicateStatusIdle: () => setStatusLight(COLOUR.WHITE, 0.5),
+        indicateStatusActive: () => setStatusLight(COLOUR.ORANGE),
+        indicateStatusAwaitingResponse: () => setStatusLight(COLOUR.GREEN),
+        indicateStatusListening: () => setStatusLight(COLOUR.CYAN),
+        indicateStatusProcessingAudio: () =>
+          setStatusLight(COLOUR.CYAN, COLOUR.GREEN),
+        indicateStatusError: () => setStatusLight(COLOUR.RED),
       },
       guards: {
         shouldGeneratePoem: (context) => context.answers >= 3,
+        speechDetected: (context) => context.speechDetected,
+        speechRecognised: (context) => context.speechRecognised,
       },
     },
   )

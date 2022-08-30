@@ -1,11 +1,13 @@
 <script context="module">
   import { get } from '$lib/utils/get'
 
+  export const prerender = false
+
   export async function load({ fetch }) {
     return {
       props: {
         phrases: await get.phrases(
-          ['greetings', 'acknowledgements', 'questions-ted-x'],
+          ['greetings', 'acknowledgements', 'questions-generic'],
           fetch,
         ),
       },
@@ -29,6 +31,7 @@
     type Response,
   } from './_speech-recognition'
   import { create, STATE, EVENT } from './_state-machine'
+  import { setStatusLight } from '../_status-light'
 
   export let phrases: { [name: string]: string[] }
 
@@ -41,15 +44,7 @@
   let logs: string[] = []
 
   onMount(async () => {
-    recogniseSpeech(onRecogniseSpeech)
-  })
-
-  onEvent('typing-complete', () => send(EVENT.TYPING_COMPLETE))
-  onEvent('audience-detected', () => {
-    if ($state.value === STATE.IDLE) {
-      log('AUDIENCE DETECTED')
-    }
-    send(EVENT.AUDIENCE_DETECTED)
+    recogniseSpeech(onRecogniseSpeech, onDetectSpeech)
   })
 
   const { state, send } = useMachine(
@@ -58,8 +53,8 @@
         type(random(phrases.greetings))
       },
       ask() {
-        type(random(phrases['questions-ted-x']))
-        log('WAITING FOR RESPONSE')
+        type(random(phrases['questions-generic']))
+        log('ASKING QUESTION')
       },
       acknowledge() {
         type(random(phrases.acknowledgements) + '\n\n')
@@ -69,19 +64,30 @@
         generatePoem()
         responses = []
       },
+      setStatusLight,
     }),
   )
 
-  function random(array: string[]) {
-    return array[Math.floor(Math.random() * array.length)]
-  }
+  onEvent('queue-empty', () => send(EVENT.TYPING_COMPLETE))
+  onEvent('button-down', () => send(EVENT.BUTTON_DOWN))
+  onEvent('button-up', () => send(EVENT.BUTTON_UP))
+  onEvent('audience-detected', () => {
+    if ($state.value === STATE.IDLE) {
+      log('AUDIENCE DETECTED')
+    }
+    send(EVENT.AUDIENCE_DETECTED)
+  })
+
+  // service.subscribe(console.log)
 
   function onRecogniseSpeech(event: { results: SpeechRecognitionResultList }) {
     const { results } = event
     const response = results[results.length - 1][0].transcript
-    log(`RECOGNISED SPEECH: "${response}"`)
+    // log(`RECOGNISED SPEECH: "${response}" (${$state.value})`)
+    console.warn(`RECOGNISED SPEECH: "${response}" (${$state.value})`)
 
     if ($state.value === STATE.LISTENING) {
+      console.warn('updating stores responses')
       responses = [
         ...responses,
         { original: response, filtered: filterStopWords(response) },
@@ -94,7 +100,17 @@
       text: response,
     })
 
-    send(EVENT.AUDIO_DETECTED)
+    // console.warn('SPEECH RECOGNISED')
+    send(EVENT.SPEECH_RECOGNISED)
+  }
+
+  function onDetectSpeech() {
+    console.warn('DETECTED SPEECH')
+    send(EVENT.SPEECH_DETECTED)
+  }
+
+  function random(array: string[]) {
+    return array[Math.floor(Math.random() * array.length)]
   }
 
   function type(text: string, addToConversation = true) {

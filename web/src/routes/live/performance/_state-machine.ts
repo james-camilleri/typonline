@@ -10,6 +10,7 @@ export enum STATE {
   LISTENING = 'listening',
   ACKNOWLEDGING = 'acknowledging',
   PROCESSING_AUDIO = 'processing-audio',
+  DETECTION_ERROR = 'detection-error',
   WAITING = 'waiting',
   WRITING_POEM = 'writing-poem',
   COOLDOWN = 'cooldown',
@@ -102,12 +103,10 @@ export function create({ greet, ask, acknowledge, generate, setStatusLight }) {
                 target: STATE.ACKNOWLEDGING,
                 cond: 'speechRecognised',
               },
+              // There's a bit of a delay in recognising the audio, go to a
+              // processing state if the user lets go to to soon.
               {
                 target: STATE.PROCESSING_AUDIO,
-                cond: 'speechDetected',
-              },
-              {
-                target: STATE.AWAITING_RESPONSE,
               },
             ],
             [EVENT.SPEECH_DETECTED]: {
@@ -126,10 +125,18 @@ export function create({ greet, ask, acknowledge, generate, setStatusLight }) {
             [EVENT.SPEECH_RECOGNISED]: {
               target: STATE.ACKNOWLEDGING,
             },
-            after: {
-              [seconds(5)]: {
-                target: STATE.AWAITING_RESPONSE,
-              },
+          },
+          after: {
+            [seconds(5)]: {
+              target: STATE.DETECTION_ERROR,
+            },
+          },
+        },
+        [STATE.DETECTION_ERROR]: {
+          entry: 'indicateStatusError',
+          after: {
+            [seconds(1)]: {
+              target: STATE.AWAITING_RESPONSE,
             },
           },
         },
@@ -150,9 +157,7 @@ export function create({ greet, ask, acknowledge, generate, setStatusLight }) {
           },
         },
         [STATE.WRITING_POEM]: {
-          entry: assign({
-            answers: 0,
-          }),
+          entry: ['resetAnswerCount', 'indicateStatusThinking'],
           on: {
             [EVENT.TYPING_COMPLETE]: {
               target: STATE.COOLDOWN,
@@ -160,6 +165,7 @@ export function create({ greet, ask, acknowledge, generate, setStatusLight }) {
           },
         },
         [STATE.COOLDOWN]: {
+          entry: ['indicateStatusActive'],
           after: {
             [seconds(10)]: {
               target: STATE.IDLE,
@@ -177,6 +183,9 @@ export function create({ greet, ask, acknowledge, generate, setStatusLight }) {
         countAnswer: assign({
           answers: (context: any) => context.answers + 1,
         }),
+        resetAnswerCount: assign({
+          answers: 0,
+        }),
         speechDetected: assign({
           speechDetected: true,
         }),
@@ -184,13 +193,14 @@ export function create({ greet, ask, acknowledge, generate, setStatusLight }) {
           speechRecognised: true,
         }),
         indicateStatusIdle: () => setStatusLight(COLOUR.WHITE, COLOUR.GREY),
-        // indicateStatusIdle: () => setStatusLight(COLOUR.WHITE, 0.5),
         indicateStatusActive: () => setStatusLight(COLOUR.ORANGE),
         indicateStatusAwaitingResponse: () => setStatusLight(COLOUR.GREEN),
         indicateStatusListening: () => setStatusLight(COLOUR.CYAN),
         indicateStatusProcessingAudio: () =>
           setStatusLight(COLOUR.CYAN, COLOUR.GREEN),
         indicateStatusError: () => setStatusLight(COLOUR.RED),
+        indicateStatusThinking: () =>
+          setStatusLight(COLOUR.ORANGE, COLOUR.AMBER),
       },
       guards: {
         shouldGeneratePoem: (context) => context.answers >= 3,

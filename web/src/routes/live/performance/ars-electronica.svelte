@@ -86,7 +86,9 @@
     // log(`RECOGNISED SPEECH: "${response}" (${$state.value})`)
     console.warn(`RECOGNISED SPEECH: "${response}" (${$state.value})`)
 
-    if ($state.value === STATE.LISTENING) {
+    if (
+      [STATE.LISTENING, STATE.PROCESSING_AUDIO].includes($state.value as STATE) // Ugly type coercion, sorry.
+    ) {
       console.warn('updating stores responses')
       responses = [
         ...responses,
@@ -149,7 +151,7 @@
     await fetch('/api/conversations/post', {
       method: 'POST',
       body: JSON.stringify(post),
-    }).then((response) => response.json())
+    })
   }
 </script>
 

@@ -36,6 +36,7 @@ export async function broadcast(payload: any) {
 export async function fireEvent(event: { type: string; data?: any }) {
   if (event.type !== 'heartbeat') {
     console.info(`Event fired (control panel): "${event.type}"`)
+    console.debug('Payload:', event.data)
   }
 
   webSocket && webSocket.send(JSON.stringify(event))

@@ -17,6 +17,13 @@ html {
   @for $i from 1 through 5 {
     --h#{$i}-font-size: #{list.nth(size.$heading-sizes, $i)};
   }
+
+  // Hyphenate text on smaller devices.
+  @media (max-width: breakpoints.$sm) {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
 }
 
 html,

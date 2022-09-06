@@ -54,18 +54,13 @@
 
     eventState = STATE.WAITING
     try {
-      const response = await fireEvent({
+      await fireEvent({
         type: eventName,
         data: JSON.parse(eventBody),
       })
 
-      eventState = response.ok ? STATE.SUCCESS : STATE.ERROR
-      if (response.ok) {
-        eventName = ''
-        eventBody = ''
-      }
+      eventState = STATE.SUCCESS
     } catch (e) {
-      console.error('fak')
       console.error(e)
       eventState = STATE.ERROR
     }

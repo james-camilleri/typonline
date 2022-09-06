@@ -4,6 +4,7 @@ import {
   RiChat4Line,
   RiDownload2Line,
   RiDraftLine,
+  RiImage2Line,
   RiSettings2Line,
 } from 'react-icons/ri'
 
@@ -19,6 +20,15 @@ export default () =>
             .title('Conversations')
             .filter('_type == "post"')
             .schemaType('post'),
+        ),
+      S.listItem()
+        .title('Media')
+        .icon(RiImage2Line)
+        .child(
+          S.documentList()
+            .title('Media')
+            .filter('_type == "media"')
+            .schemaType('media'),
         ),
       S.divider(),
       S.listItem()

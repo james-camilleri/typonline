@@ -34,7 +34,7 @@ button {
 }
 
 p {
-  margin-block: var(--xs);
+  margin-block: var(--md);
 }
 
 p:first-child {
@@ -91,7 +91,7 @@ h1 {
   }
 
   @media (max-width: breakpoints.$sm) {
-    font-size: var(--xl);
+    font-size: 23vw;
 
     overflow-wrap: anywhere;
   }

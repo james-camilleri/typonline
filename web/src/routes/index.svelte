@@ -27,6 +27,17 @@
       life of its own. Animated by hidden robotics and artificial intelligence,
       it writes poetry through a dialogue with its human audience.
     </p>
+    <p>
+      Check us out on <a href="https://www.instagram.com/typo_digital_2022/"
+        >instagram</a
+      >, or click through the site to learn more.
+    </p>
+    <p>
+      Typo has been exhibited at the Design for Performance and Interaction show
+      at Bloomsbury Theatre in March 2022, the London Festival of Architecture
+      2022, TEDx at Goodenough College, and now at the Ars Electronica
+      international arts festival in Linz.
+    </p>
     {#if conversations.length > 0}
       <p>
         Below are some of the more memorable conversations the typewriter has

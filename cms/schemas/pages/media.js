@@ -6,8 +6,10 @@ export default {
     {
       name: 'images',
       type: 'array',
-      of: [{ type: 'webImage' }],
-      options: { hotspot: true },
+      of: [{ type: 'webImage', options: { hotspot: true } }],
+      options: {
+        layout: 'grid',
+      },
     },
   ],
 }

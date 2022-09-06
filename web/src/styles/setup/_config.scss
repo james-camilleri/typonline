@@ -45,6 +45,9 @@ $ratio: "octave";
   --transition-fast: 0.15s;
   --transition-medium: 0.3s;
 
+  // Needed for WebImage
+  --transition-speed-medium: var(--transition-medium);
+
   // Forms
   --form-control-padding: var(--xs) var(--sm);
   --form-control-background: var(--secondary);

@@ -12,6 +12,9 @@
   import PageTransition from '$lib/components/transition/PageTransition.svelte'
 
   import CONFIG from '$lib/config'
+  import { setContext } from 'svelte'
+
+  setContext('CONFIG', CONFIG)
 
   export let url: URL
 </script>
@@ -27,6 +30,9 @@
           </li>
           <li>
             <a href="/about">about</a>
+          </li>
+          <li>
+            <a href="/media">media</a>
           </li>
           <li>
             <a href="/feedback">feedback</a>
@@ -57,7 +63,7 @@
     overflow-y: auto;
 
     @media (min-width: breakpoints.$md) {
-      padding: 0 var(--xxl) var(--md);
+      padding: 0 var(--xxl) var(--lg);
     }
   }
 
@@ -82,6 +88,8 @@
   nav {
     ul {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       margin: 0;
       text-align: right;
 

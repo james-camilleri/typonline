@@ -23,6 +23,11 @@ export async function getPage(page: PageId, fetch: Fetch): Promise<Page> {
     .then((page) => prefetchImageMetadata(page, CONFIG.SANITY, fetch))
 }
 
+export async function getImages(fetch: Fetch) {
+  const mediaPage = await getPage('media', fetch)
+  return mediaPage.images
+}
+
 export async function getPhrases(
   names: string[],
   fetch: Fetch,
@@ -54,4 +59,5 @@ export const get = {
   page: getPage,
   phrases: getPhrases,
   thumbnailUrl: getThumbnailUrlFor,
+  images: getImages,
 }

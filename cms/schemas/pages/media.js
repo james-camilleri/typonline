@@ -4,8 +4,9 @@ export default {
   title: 'Media',
   fields: [
     {
-      name: 'media',
-      type: 'webImage',
+      name: 'images',
+      type: 'array',
+      of: [{ type: 'webImage' }],
       options: { hotspot: true },
     },
   ],

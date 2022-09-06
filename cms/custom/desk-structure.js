@@ -25,10 +25,7 @@ export default () =>
         .title('Media')
         .icon(RiImage2Line)
         .child(
-          S.documentList()
-            .title('Media')
-            .filter('_type == "media"')
-            .schemaType('media'),
+          S.document().title('Media').schemaType('media').documentId('media'),
         ),
       S.divider(),
       S.listItem()

@@ -20,7 +20,11 @@ export async function POST({ request }) {
 
     const response = await fetch(`${ngrokUrl}/brb`, {
       method: 'POST',
-      body: await request.text,
+      body: await request.text(),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     })
 
     if (response.ok) {
@@ -29,7 +33,7 @@ export async function POST({ request }) {
 
     return {
       status: response.status,
-      body: 'Fail to change BRB status',
+      body: 'Failed to change BRB status',
     }
   } catch (e) {
     return {

@@ -23,10 +23,15 @@ export async function POST({ request }) {
       presence_penalty: 0,
     })
 
+    const poem = response.data.choices[0].text
+      .split('\n')
+      .filter((line) => !line.startsWith(','))
+      .join('\n')
+
     return {
       status: response.status,
       body: {
-        poem: response.data.choices[0].text,
+        poem,
       },
     }
   } catch (e) {

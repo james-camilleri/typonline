@@ -10,8 +10,7 @@
   import Input from '$lib/components/form/Input.svelte'
   import StateButton, { STATE } from '$lib/components/form/StateButton.svelte'
   import { browser } from '$app/env'
-  import { COLOUR, setStatusLight } from './_status-light'
-  import { tick } from 'svelte'
+  import { COLOUR, setStatusLight } from '../_status-light'
   import { fireEvent } from '$lib/connection'
 
   const RESET_TIMEOUT = 5000

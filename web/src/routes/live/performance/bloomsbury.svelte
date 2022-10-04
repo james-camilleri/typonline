@@ -186,7 +186,6 @@
 <div class="wrapper">
   <Grid columns={[2, 1, 1]}>
     <div class="main-panel">
-      <Title text={CONFIG.GENERAL.siteTitle} subtitle="Bloomsbury Theatre" />
       <div class="controls">
         <Grid gap="var(--sm)">
           <div class="text-wrapper">

@@ -244,7 +244,6 @@
 <style lang="scss">
   .wrapper {
     display: flex;
-    margin-top: var(--gutter);
   }
 
   .main-panel {
@@ -254,7 +253,6 @@
 
   .panel {
     padding: var(--md);
-    margin-top: var(--xl);
     background: rgba(0 0 0 / 5%);
 
     .heading {
@@ -265,12 +263,11 @@
 
   .controls {
     flex: 1;
-    margin-top: var(--lg);
   }
 
   .text-wrapper {
-    min-height: 2em;
     justify-self: flex-start;
+    min-height: 2em;
   }
 
   .text {

@@ -8,7 +8,10 @@
   let state: STATE = STATE.IDLE
 
   async function generatePoem() {
-    const seeds = seedString.replace(',', ' ').split(' ').filter(Boolean)
+    const seeds = seedString
+      .replaceAll(',', ' ')
+      .split(' ')
+      .filter((text) => text && text !== ' ')
     console.log('seeds', seeds)
 
     if (seeds.length === 0) return

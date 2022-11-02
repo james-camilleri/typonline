@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Grid from '$lib/components/layout/Grid.svelte'
   import Input from '$lib/components/form/Input.svelte'
   import StateButton, { STATE } from '$lib/components/form/StateButton.svelte'
 
@@ -33,6 +32,7 @@
 
 <div class="wrapper">
   <div class="controls">
+    <p>Put the words you'd like to generate a poem from below.</p>
     <Input name="poem seed words" width="long" bind:value={seedString} />
     <StateButton
       {state}

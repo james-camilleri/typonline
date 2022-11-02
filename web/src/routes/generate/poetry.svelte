@@ -31,8 +31,8 @@
 </script>
 
 <div class="wrapper">
+  <p>Put the words you'd like to generate a poem from below.</p>
   <div class="controls">
-    <p>Put the words you'd like to generate a poem from below.</p>
     <Input name="poem seed words" width="long" bind:value={seedString} />
     <StateButton
       {state}

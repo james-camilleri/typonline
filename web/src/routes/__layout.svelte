@@ -22,7 +22,8 @@
 <div class="grid">
   <header>
     <Title text={CONFIG.GENERAL.siteTitle} />
-    {#if !url.pathname.includes('live')}
+    <!-- TODO: Convert to a proper nested layout system one day. Maybe. -->
+    {#if !url.pathname.includes('live') && !url.pathname.includes('generate')}
       <nav>
         <ul>
           <li>

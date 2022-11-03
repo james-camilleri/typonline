@@ -166,11 +166,12 @@ export function create({ greet, ask, acknowledge, generate, setStatusLight }) {
         },
         [STATE.COOLDOWN]: {
           entry: ['indicateStatusActive'],
-          after: {
-            [seconds(10)]: {
-              target: STATE.IDLE,
-            },
-          },
+          type: 'final',
+          // after: {
+          //   [seconds(10)]: {
+          //     target: STATE.IDLE,
+          //   },
+          // },
         },
       },
     },

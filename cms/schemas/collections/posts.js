@@ -21,7 +21,7 @@ export default {
           },
         },
       ],
-      readonly: true,
+      readonly: false,
     },
     {
       name: 'seeds',

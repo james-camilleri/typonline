@@ -8,7 +8,7 @@
   </p>
   <p>
     <iframe
-      src="https://www.youtube.com/embed/5LoYcGrAqkc"
+      src="https://www.youtube.com/embed/nc010SwCEZ8"
       title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -16,6 +16,7 @@
       style="width: 100%; aspect-ratio: 16/9; border-radius: var(--border-radius);"
     />
   </p>
+
   <p>
     The mechanical typewriter is an anachronism, relegated to a bygone era, and
     yet is still a potent and recognised symbol of art and literature, of
@@ -32,6 +33,16 @@
     audiences the chance to interact with an enigmatic machine, representative
     of a long history of literature and industry. No longer a simple tool, it
     gains a new role as an autonomous co-creator alongside its audience.
+  </p>
+  <p>
+    <iframe
+      src="https://www.youtube.com/embed/5LoYcGrAqkc"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="width: 100%; aspect-ratio: 16/9; border-radius: var(--border-radius);"
+    />
   </p>
 
   <h2>the artists</h2>

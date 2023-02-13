@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "sanity start",
-    "build": "sanity build && node ./node_modules/@james-camilleri/replace-sanity-favicon"
+    "build": "sanity build && node ./node_modules/@james-camilleri/replace-sanity-favicon",
+    "data:generate-breakpoints": "env-cmd node ./scripts/generate-breakpoints.js"
   },
   "author": "James Camilleri",
   "license": "ISC",
@@ -13,19 +14,22 @@
     "@james-camilleri/sanity-web-image": "^1.0.10",
     "@james-camilleri/slack-logger": "^1.2.6",
     "@netlify/functions": "^1.0.0",
-    "@sanity/base": "^2.30.1",
-    "@sanity/cli": "^2.29.3",
+    "@sanity/base": "^2.31.1",
+    "@sanity/cli": "^2.31.1",
     "@sanity/client": "^3.3.0",
     "@sanity/components": "^2.14.0",
-    "@sanity/core": "^2.30.2",
-    "@sanity/default-layout": "^2.30.1",
-    "@sanity/default-login": "^2.30.1",
-    "@sanity/desk-tool": "^2.30.1",
-    "@sanity/vision": "^2.30.1",
+    "@sanity/core": "^2.31.1",
+    "@sanity/default-layout": "^2.31.1",
+    "@sanity/default-login": "^2.31.1",
+    "@sanity/desk-tool": "^2.31.1",
+    "@sanity/vision": "^2.31.1",
     "prop-types": "^15.8.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-icons": "^4.3.1",
     "styled-components": "^5.3.5"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
   }
 }

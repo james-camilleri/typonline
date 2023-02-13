@@ -43,7 +43,6 @@
       if (navItemRefs[0] === document.activeElement && e.shiftKey) {
         e.preventDefault()
         menuButtonRef.focus()
-        console.log('document.activeElement', document.activeElement)
         return
       }
     }

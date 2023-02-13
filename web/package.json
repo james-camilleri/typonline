@@ -20,7 +20,7 @@
   "devDependencies": {
     "@beyonk/gdpr-cookie-consent-banner": "^9.0.3",
     "@fortawesome/fontawesome-free": "^6.1.1",
-    "@james-camilleri/sanity-web-image": "^1.0.10",
+    "@james-camilleri/sanity-web-image": "^2.0.4",
     "@poppanator/sveltekit-svg": "^0.3.1",
     "@portabletext/svelte": "^0.2.0",
     "@portabletext/types": "^1.0.3",
@@ -37,7 +37,7 @@
     "eslint-plugin-svelte3": "^3.4.1",
     "lodash": "^4.17.21",
     "lorem-ipsum": "^2.0.4",
-    "ml5": "^0.12.2",
+    "ml5": "^1.0.0",
     "postcss-html": "^1.3.0",
     "prettier": "^2.6.1",
     "prettier-plugin-svelte": "^2.6.0",

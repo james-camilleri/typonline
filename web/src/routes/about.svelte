@@ -47,7 +47,7 @@
 
   <h2>the artists</h2>
   <p>
-    <strong>James Camileri</strong> is a software engineer by day, but has
+    <strong>James Camilleri</strong> is a software engineer by day, but has
     experience in graphic and motion design, and is wildly passionate about the
     theatre, whether it's on stage as a performer or as part of a production
     team. With a burgeoning interest in generative digital art, he is keen on

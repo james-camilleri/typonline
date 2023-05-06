@@ -23,4 +23,8 @@
   :global(.svelte-lightbox-thumbnail > .image-wrapper) {
     aspect-ratio: 1;
   }
+
+  :global(.svelte-lightbox-body .image-wrapper img) {
+    max-height: 80vh;
+  }
 </style>

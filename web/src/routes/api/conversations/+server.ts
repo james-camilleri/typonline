@@ -1,3 +1,4 @@
+import { json } from '@sveltejs/kit'
 import sanityClient from '@sanity/client'
 import CONFIG from '$lib/config'
 
@@ -15,17 +16,13 @@ const client = sanityClient({
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function GET() {
   try {
-    const posts = await client.fetch('*[_type == "post" && public == true]')
+    const posts = await client.fetch(
+      '*[_type == "post" && public == true]|order(_createdAt desc)',
+    )
 
-    return {
-      status: 200,
-      body: posts,
-    }
+    return json(posts)
   } catch (e) {
-    return {
-      status: 500,
-      body: e.message,
-    }
+    return new Response(e.message, { status: 500 })
   }
 }
 
@@ -40,14 +37,8 @@ export async function POST({ request }) {
 
     await client.create(doc)
   } catch (e) {
-    return {
-      status: 500,
-      body: e.message,
-    }
+    return new Response(e.message, { status: 500 })
   }
 
-  return {
-    status: 200,
-    body: 'Conversation successfully stored',
-  }
+  return new Response('Conversation successfully stored')
 }

@@ -1,4 +1,4 @@
-import { prefetchImageMetadata } from '@james-camilleri/sanity-web-image'
+import { prefetchImageMetadata } from '@james-camilleri/sanity-web-image/svelte'
 import imageUrlBuilder from '@sanity/image-url'
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import CONFIG from '$lib/config'

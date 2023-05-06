@@ -16,16 +16,9 @@ const client = sanityClient({
 export async function GET() {
   try {
     const settings = await client.getDocument('settings')
-
-    return {
-      status: 200,
-      body: settings.ngrokUrl,
-    }
+    return new Response(settings.ngrokUrl)
   } catch (e) {
-    return {
-      status: 500,
-      body: e.message,
-    }
+    return new Response(e.message, { status: 500 })
   }
 }
 
@@ -35,14 +28,8 @@ export async function POST({ request }) {
     const payload = await request.json()
     await client.patch('settings').set({ ngrokUrl: payload.url }).commit()
   } catch (e) {
-    return {
-      status: 500,
-      body: e.message,
-    }
+    return new Response(e.message, { status: 500 })
   }
 
-  return {
-    status: 200,
-    body: 'ngrok URL updated successfully',
-  }
+  return new Response('ngrok URL updated successfully')
 }

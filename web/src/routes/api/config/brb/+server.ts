@@ -28,22 +28,15 @@ export async function POST({ request }) {
     })
 
     if (response.ok) {
-      return { status: 200 }
+      return new Response(undefined)
     }
 
-    return {
+    return new Response('Failed to change BRB status', {
       status: response.status,
-      body: 'Failed to change BRB status',
-    }
+    })
   } catch (e) {
-    return {
-      status: 500,
-      body: e.message,
-    }
+    return new Response(e.message, { status: 500 })
   }
 
-  return {
-    status: 200,
-    body: 'ngrok URL updated successfully',
-  }
+  return new Response('ngrok URL updated successfully')
 }

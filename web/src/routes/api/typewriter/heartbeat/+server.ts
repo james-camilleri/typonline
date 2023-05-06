@@ -20,20 +20,11 @@ export async function GET() {
 
     const response = await fetch(`${ngrokUrl}/heartbeat`)
     if (response.ok) {
-      return {
-        status: 200,
-        body: await response.json(),
-      }
+      return new Response(await response.json())
     }
 
-    return {
-      status: response.status,
-      body: 'Heartbeat failed.',
-    }
+    return new Response('Heartbeat failed.', { status: response.status })
   } catch (e) {
-    return {
-      status: 500,
-      body: e.message,
-    }
+    return new Response(e.message, { status: 500 })
   }
 }

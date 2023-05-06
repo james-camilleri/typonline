@@ -17,16 +17,10 @@ export async function POST({ request }: { request: FeedbackRequestEvent }) {
     const payload = await request.json()
     await postToSanity(payload)
   } catch (e) {
-    return {
-      status: 500,
-      body: e.message,
-    }
+    return new Response(e.message, { status: 500 })
   }
 
-  return {
-    status: 200,
-    body: 'Message sent successfully',
-  }
+  return new Response('Message sent successfully')
 }
 
 async function postToSanity(sanityPayload: FeedbackPayload) {

@@ -1,7 +1,8 @@
+import { json } from '@sveltejs/kit'
 import shuffle from 'lodash/shuffle.js'
 import { Configuration, OpenAIApi } from 'openai'
 
-import poemSeeds from './_seeds'
+import poemSeeds from '../_seeds'
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -36,16 +37,8 @@ export async function POST({ request }) {
       .filter((line) => !line.startsWith(','))
       .join('\n')
 
-    return {
-      status: response.status,
-      body: {
-        poem,
-      },
-    }
+    return json({ poem }, { status: response.status })
   } catch (e) {
-    return {
-      status: 500,
-      body: e.message,
-    }
+    return new Response(e.message, { status: 500 })
   }
 }

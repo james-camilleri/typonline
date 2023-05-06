@@ -1,9 +1,3 @@
-<script lang="ts" context="module">
-  import type { Load } from '@sveltejs/kit'
-
-  export const load: Load = async ({ url }) => ({ props: { url } })
-</script>
-
 <script lang="ts">
   import '../styles/global.scss'
 
@@ -16,14 +10,14 @@
 
   setContext('CONFIG', CONFIG)
 
-  export let url: URL
+  export let data
 </script>
 
 <div class="grid">
   <header>
     <Title text={CONFIG.GENERAL.siteTitle} />
     <!-- TODO: Convert to a proper nested layout system one day. Maybe. -->
-    {#if !url.pathname.includes('live') && !url.pathname.includes('generate')}
+    {#if !data.url.pathname.includes('live') && !data.url.pathname.includes('generate')}
       <nav>
         <ul>
           <li>
@@ -43,11 +37,11 @@
     {/if}
   </header>
   <main>
-    <PageTransition {url}>
+    <PageTransition url={data.url}>
       <slot />
     </PageTransition>
   </main>
-  {#if url.pathname.includes('live')}
+  {#if data.url.pathname.includes('live')}
     <Footer />
   {/if}
 </div>

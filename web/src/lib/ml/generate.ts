@@ -1,4 +1,5 @@
-import ml5 from 'ml5'
+// Old neural network.
+// import ml5 from 'ml5'
 
 let _rnn
 const length = 40

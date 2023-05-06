@@ -1,6 +1,4 @@
-<script context="module">
-  export const prerender = true
-</script>
+
 
 <script lang="ts">
   import type { State } from '$lib/components/form/StateButton.svelte'

@@ -31,11 +31,8 @@ export async function POST({ request }) {
       body: payload,
     })
 
-    return { status: response.status }
+    return new Response(undefined, { status: response.status })
   } catch (e) {
-    return {
-      status: 500,
-      body: e.message,
-    }
+    return new Response(e.message, { status: 500 })
   }
 }

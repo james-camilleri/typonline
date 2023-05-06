@@ -14,7 +14,5 @@ const client = sanityClient({
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function GET() {
-  return {
-    body: await client.getDocument('settings'),
-  }
+  return new Response(await client.getDocument('settings'))
 }

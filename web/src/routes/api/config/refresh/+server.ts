@@ -20,17 +20,11 @@ export async function GET() {
 
     const response = await fetch(`${ngrokUrl}/refresh`)
     if (response.ok) {
-      return { status: 200 }
+      return new Response(undefined)
     }
 
-    return {
-      status: response.status,
-      body: 'Config reset failed.',
-    }
+    return new Response('Config reset failed.', { status: response.status })
   } catch (e) {
-    return {
-      status: 500,
-      body: e.message,
-    }
+    return new Response(e.message, { status: 500 })
   }
 }

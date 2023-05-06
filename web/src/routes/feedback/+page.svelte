@@ -1,7 +1,3 @@
-<script lang="ts" context="module">
-  export const prerender = true
-</script>
-
 <script lang="ts">
   import { tick } from 'svelte'
   import { page } from '$app/stores'
@@ -12,8 +8,6 @@
     type State,
     STATE,
   } from '$lib/components/form/StateButton.svelte'
-  import Title from '$lib/components/global/Title.svelte'
-  import Transition from '$lib/components/transition/Transition.svelte'
 
   // Taken from https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression.
   const EMAIL_REGEX =
@@ -35,7 +29,8 @@
       type: 'email',
       value: '',
       validations: [
-        (value) => !EMAIL_REGEX.test(value) && 'Enter a valid email address',
+        (value) =>
+          value && !EMAIL_REGEX.test(value) && 'Enter a valid email address',
       ],
       valid: undefined,
       optional: true,

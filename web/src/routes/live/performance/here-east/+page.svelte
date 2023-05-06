@@ -1,22 +1,7 @@
-<script context="module">
-  import { get } from '$lib/utils/get'
-
-  export async function load({ fetch }) {
-    return {
-      props: {
-        phrases: await get.phrases(
-          ['greetings', 'acknowledgements', 'questions-architecture'],
-          fetch,
-        ),
-      },
-    }
-  }
-</script>
-
 <script lang="ts">
   import { onEvent } from '$lib/connection'
 
-  import { onMount, tick } from 'svelte'
+  import { onMount } from 'svelte'
 
   import Title from '$lib/components/global/Title.svelte'
   import Grid from '$lib/components/layout/Grid.svelte'
@@ -26,12 +11,13 @@
     recogniseSpeech,
     filterStopWords,
     type Response,
-  } from './_speech-recognition'
+  } from '../_speech-recognition'
 
-  import { create, STATE, EVENT } from './_state-machine'
+  import { create, STATE, EVENT } from '../_state-machine'
   import { useMachine } from '@xstate/svelte'
 
-  export let phrases: { [name: string]: string[] }
+  export let data
+  $: ({ phrases } = data)
 
   let responses: Response[] = []
   let logs: string[] = []

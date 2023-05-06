@@ -1,19 +1,5 @@
-<script context="module">
-  import { get } from '$lib/utils/get'
-  import { PAGES } from '$lib/types/pages'
-
-  export async function load({ fetch }) {
-    return {
-      props: {
-        page: await get.page(PAGES.PERFORMANCE, fetch),
-      },
-    }
-  }
-</script>
-
 <script lang="ts">
   import { STATE, type State } from '$lib/components/form/StateButton.svelte'
-  import type { Performance } from '$lib/types/pages/performance'
 
   import shuffle from 'lodash/shuffle.js'
   import { onMount, tick } from 'svelte'
@@ -27,12 +13,13 @@
     recogniseSpeech,
     filterStopWords,
     type Response,
-  } from './_speech-recognition'
+  } from '../_speech-recognition'
 
   const SUBMIT_GRACE_PERIOD_MS = 2000
   const CLEAR_AFTER_MS = 1000
 
-  export let page: Performance
+  export let data
+  $: ({ page } = data)
 
   const _questions = shuffle(page.questions)
   const questions = [..._questions]

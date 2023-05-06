@@ -1,20 +1,5 @@
-<script context="module">
-  import { get } from '$lib/utils/get'
-
-  export async function load({ fetch }) {
-    return {
-      props: {
-        phrases: await get.phrases(
-          ['greetings', 'acknowledgements', 'questions-ted-x'],
-          fetch,
-        ),
-      },
-    }
-  }
-</script>
-
 <script lang="ts">
-  import type { Post } from './types'
+  import type { Post } from '../types/index.js'
 
   import { onMount } from 'svelte'
   import { useMachine } from '@xstate/svelte'
@@ -27,10 +12,11 @@
     recogniseSpeech,
     filterStopWords,
     type Response,
-  } from './_speech-recognition'
-  import { create, STATE, EVENT } from './_state-machine'
+  } from '../_speech-recognition'
+  import { create, STATE, EVENT } from '../_state-machine'
 
-  export let phrases: { [name: string]: string[] }
+  export let data
+  $: ({ phrases } = data)
 
   let post: Post = {
     conversation: [],

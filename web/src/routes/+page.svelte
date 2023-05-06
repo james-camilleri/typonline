@@ -1,23 +1,9 @@
-<script context="module">
-  export async function load({ fetch }) {
-    const url = '/api/conversations'
-    const response = await fetch(url)
-
-    return {
-      status: response.status,
-      props: {
-        conversations: await response.json(),
-      },
-    }
-  }
-</script>
-
 <script lang="ts">
   import Grid from '$lib/components/layout/Grid.svelte'
   import Post from '$lib/components/posts/Post.svelte'
   import Transition from '$lib/components/transition/Transition.svelte'
 
-  export let conversations
+  export let data
 </script>
 
 <Grid>
@@ -35,17 +21,17 @@
     <p>
       Typo has been exhibited at the Design for Performance and Interaction show
       at Bloomsbury Theatre in March 2022, the London Festival of Architecture
-      2022, TEDx at Goodenough College, and now at the Ars Electronica
-      international arts festival in Linz.
+      2022, TEDx at Goodenough College, the Ars Electronica international arts
+      festival in Linz, and the PUSH UX Conference in Berlin.
     </p>
-    {#if conversations.length > 0}
+    {#if data.conversations.length > 0}
       <p>
-        Below are some of the more memorable conversations the typewriter has
+        These are some of the more memorable conversations the typewriter has
         had with its audiences.
       </p>
     {/if}
   </div>
-  {#each conversations as conversation, i}
+  {#each data.conversations as conversation, i}
     <Transition order={i}>
       <Post content={conversation} />
     </Transition>

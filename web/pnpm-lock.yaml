@@ -22,6 +22,7 @@ specifiers:
   lodash: ^4.17.21
   lorem-ipsum: ^2.0.8
   ml5: ^1.0.0
+  nanoid: ^4.0.2
   nodemailer: ^6.9.1
   openai: ^3.2.1
   postcss-html: ^1.5.0
@@ -73,6 +74,7 @@ devDependencies:
   lodash: 4.17.21
   lorem-ipsum: 2.0.8
   ml5: 1.0.0
+  nanoid: 4.0.2
   postcss-html: 1.5.0
   prettier: 2.8.8
   prettier-plugin-svelte: 2.10.0_hh674vglkqayh4v7xhxmrcauva
@@ -2419,6 +2421,12 @@ packages:
   /nanoid/3.3.6:
     resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+    dev: true
+
+  /nanoid/4.0.2:
+    resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
+    engines: {node: ^14 || ^16 || >=18}
     hasBin: true
     dev: true
 

@@ -24,10 +24,13 @@ export async function GET() {
 
 /** @type {import('@sveltejs/kit').RequestHandler} */
 export async function POST({ request }) {
+  console.log('request', request)
   try {
     const payload = await request.json()
+    console.log('payload', payload)
     await client.patch('settings').set({ ngrokUrl: payload.url }).commit()
   } catch (e) {
+    console.error(e)
     return new Response(e.message, { status: 500 })
   }
 

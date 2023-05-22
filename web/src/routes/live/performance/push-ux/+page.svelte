@@ -18,8 +18,8 @@
   import { loadQuestions, nextQuestion } from '../_questions'
 
   export let data
-  $: ({ phrases } = data)
-  loadQuestions(phrases?.['questions-generic'])
+  let { phrases } = data
+  loadQuestions(phrases.['questions-generic'])
 
   let post: Post = {
     conversation: [],

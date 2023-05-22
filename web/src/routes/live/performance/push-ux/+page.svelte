@@ -19,7 +19,7 @@
 
   export let data
   $: ({ phrases } = data)
-  loadQuestions(phrases['questions-generic'])
+  loadQuestions(phrases?.['questions-generic'])
 
   let post: Post = {
     conversation: [],

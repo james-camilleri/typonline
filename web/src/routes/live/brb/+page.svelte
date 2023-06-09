@@ -6,7 +6,7 @@
   import Input from '$lib/components/form/Input.svelte'
   import StateButton, { STATE } from '$lib/components/form/StateButton.svelte'
   import { browser } from '$app/environment'
-  import { COLOUR, setStatusLight } from '../_status-light'
+  import { COLOUR, setStatusLight } from '../_lights'
   import { tick } from 'svelte'
   import { fireEvent } from '$lib/connection'
 

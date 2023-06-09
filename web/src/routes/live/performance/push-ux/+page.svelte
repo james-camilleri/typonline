@@ -14,7 +14,7 @@
     type Response,
   } from '../_speech-recognition'
   import { create, STATE, EVENT } from '../_state-machine'
-  import { setStatusLight } from '../../_status-light'
+  import { setStatusLight } from '../../_lights'
   import { loadQuestions, nextQuestion } from '../_questions'
 
   export let data

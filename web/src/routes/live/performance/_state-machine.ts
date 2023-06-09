@@ -1,6 +1,6 @@
 import { assign, createMachine } from 'xstate'
 
-import { COLOUR } from '../_status-light'
+import { COLOUR } from '../_lights'
 
 export enum STATE {
   IDLE = 'idle',

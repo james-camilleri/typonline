@@ -208,12 +208,32 @@ export function create({ greet, ask, acknowledge, generate, setStatusLight }) {
         },
         indicateStatusActive: () => {
           setStatusLight(COLOUR.ORANGE)
+          sendExternalDmxCommands(
+            {
+              channel: 101,
+              value: COLOUR.WHITE,
+            },
+            {
+              channel: 104,
+              value: COLOUR.WHITE,
+            },
+          )
         },
         indicateStatusAwaitingResponse: () => {
           setStatusLight(COLOUR.GREEN)
         },
         indicateStatusListening: () => {
           setStatusLight(COLOUR.CYAN)
+          sendExternalDmxCommands(
+            {
+              channel: 101,
+              value: COLOUR.BLUE,
+            },
+            {
+              channel: 104,
+              value: COLOUR.BLUE,
+            },
+          )
         },
         indicateStatusProcessingAudio: () => {
           setStatusLight(COLOUR.CYAN, COLOUR.GREEN)
@@ -226,11 +246,11 @@ export function create({ greet, ask, acknowledge, generate, setStatusLight }) {
           sendExternalDmxCommands(
             {
               channel: 101,
-              value: COLOUR.ORANGE,
+              value: COLOUR.BLUE,
             },
             {
               channel: 104,
-              value: COLOUR.ORANGE,
+              value: COLOUR.BLUE,
             },
           )
         },

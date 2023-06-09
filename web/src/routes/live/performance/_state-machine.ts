@@ -1,6 +1,6 @@
 import { assign, createMachine } from 'xstate'
 
-import { COLOUR } from '../_lights'
+import { COLOUR, sendExternalDmxCommands } from '../_lights'
 
 export enum STATE {
   IDLE = 'idle',
@@ -193,15 +193,47 @@ export function create({ greet, ask, acknowledge, generate, setStatusLight }) {
         speechRecognised: assign({
           speechRecognised: true,
         }),
-        indicateStatusIdle: () => setStatusLight(COLOUR.WHITE, COLOUR.GREY),
-        indicateStatusActive: () => setStatusLight(COLOUR.ORANGE),
-        indicateStatusAwaitingResponse: () => setStatusLight(COLOUR.GREEN),
-        indicateStatusListening: () => setStatusLight(COLOUR.CYAN),
-        indicateStatusProcessingAudio: () =>
-          setStatusLight(COLOUR.CYAN, COLOUR.GREEN),
-        indicateStatusError: () => setStatusLight(COLOUR.RED),
-        indicateStatusThinking: () =>
-          setStatusLight(COLOUR.ORANGE, COLOUR.AMBER),
+        indicateStatusIdle: () => {
+          sendExternalDmxCommands(
+            {
+              channel: 101,
+              value: COLOUR.WHITE,
+            },
+            {
+              channel: 104,
+              value: COLOUR.WHITE,
+            },
+          )
+          setStatusLight(COLOUR.WHITE, COLOUR.GREY)
+        },
+        indicateStatusActive: () => {
+          setStatusLight(COLOUR.ORANGE)
+        },
+        indicateStatusAwaitingResponse: () => {
+          setStatusLight(COLOUR.GREEN)
+        },
+        indicateStatusListening: () => {
+          setStatusLight(COLOUR.CYAN)
+        },
+        indicateStatusProcessingAudio: () => {
+          setStatusLight(COLOUR.CYAN, COLOUR.GREEN)
+        },
+        indicateStatusError: () => {
+          setStatusLight(COLOUR.RED)
+        },
+        indicateStatusThinking: () => {
+          setStatusLight(COLOUR.ORANGE, COLOUR.AMBER)
+          sendExternalDmxCommands(
+            {
+              channel: 101,
+              value: COLOUR.ORANGE,
+            },
+            {
+              channel: 104,
+              value: COLOUR.ORANGE,
+            },
+          )
+        },
       },
       guards: {
         shouldGeneratePoem: (context) => context.answers >= 3,

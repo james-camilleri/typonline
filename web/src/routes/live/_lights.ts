@@ -7,6 +7,12 @@ interface Colour {
   b: number
 }
 
+interface DmxCommand {
+  channel: number
+  value: Colour | number
+  duration?: number
+}
+
 export const COLOUR: Record<string, Colour> = {
   RED: { r: 255, g: 0, b: 0 },
   ORANGE: { r: 255, g: 50, b: 0 },
@@ -36,5 +42,16 @@ export async function setStatusLight(...colours: Colour[]) {
   fireEvent({
     type: 'status-light',
     data: colours,
+  })
+}
+
+export async function sendExternalDmxCommands(...commands: DmxCommand[]) {
+  if (!browser) return
+
+  commands.forEach((command) => {
+    fireEvent({
+      type: 'external-dmx',
+      data: command,
+    })
   })
 }

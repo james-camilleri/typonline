@@ -22,9 +22,10 @@
       Typo has been exhibited at the Design for Performance and Interaction show
       at Bloomsbury Theatre in March 2022, the London Festival of Architecture
       2022, TEDx at Goodenough College, the Ars Electronica international arts
-      festival in Linz, and the PUSH UX Conference in Munich. A talk about the
-      project was presented at the London Creative Coding meetup in February
-      2023, a recording of which can be seen <a
+      festival in Linz, the PUSH UX Conference in Munich, and the Prague
+      Quadrennial of Performance Design and Space. A talk about the project was
+      presented at the London Creative Coding meetup in February 2023, a
+      recording of which can be seen <a
         target="_blank"
         rel="noopener"
         href="https://www.youtube.com/live/L2U_Sd1qMJ4?feature=share&t=1032"

@@ -9,7 +9,7 @@ test('mobile visual regression', async ({ page }) => {
     await goToAndWait(page, url)
 
     await test.step(`screenshot "${name}"`, async () => {
-      await expect(page).toHaveScreenshot(`${name}--.png`, {
+      await expect(page).toHaveScreenshot(`${name}.png`, {
         fullPage: true,
       })
     })

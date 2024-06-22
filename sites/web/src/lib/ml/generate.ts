@@ -8,7 +8,7 @@ async function getRnn() {
   if (_rnn) return _rnn
 
   // _rnn = await ml5.charRNN('/models/hemingway')
-  _rnn = await ml5.charRNN('/models/ee-cummings')
+  // _rnn = await ml5.charRNN('/models/ee-cummings')
   //@ts-expect-error yye
   window.rnn = _rnn
   return _rnn

@@ -1,4 +1,4 @@
-import { Page, PlaywrightTestArgs, expect } from '@playwright/test'
+import { Page } from '@playwright/test'
 
 async function getAllVisibleNavLinks(page: Page) {
   const urls: (string | null)[] = []

@@ -27,7 +27,7 @@ jobs:
           max_timeout: 360 # 6 Minutes, depends on your build pipeline duration
 
       - name: Run Playwright tests
-        run: pnpm exec playwright test
+        run: cd ./sites/web && pnpm exec playwright test
       - uses: actions/upload-artifact@v4
         if: always()
         with:

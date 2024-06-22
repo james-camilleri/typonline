@@ -45,17 +45,19 @@ jobs:
           restore-keys: cache/${{github.repository}}/refs/heads/master
           path: ./sites/web/test/**
 
-      - name: Initialise snapshots
-        working-directory: ./sites/web
-        if: ${{steps.cache.outputs.cache-hit != 'true' || inputs.update-snapshots == 'true'}}
-        run: pnpm exec playwright test --update-snapshots
-
       - name: Wait for Netlify deploy preview
         uses: jakepartusch/wait-for-netlify-action@v1.2
         id: netlify-deploy-preview
         with:
           site_name: 'typonline'
           max_timeout: 360 # 6 Minutes, depends on your build pipeline duration
+
+      - name: Initialise snapshots
+        working-directory: ./sites/web
+        if: ${{steps.cache.outputs.cache-hit != 'true' || inputs.update-snapshots == 'true'}}
+        run: pnpm exec playwright test --update-snapshots
+        env:
+          PLAYWRIGHT_BASE_URL: ${{ steps.netlify-deploy-preview.outputs.url }}
 
       - name: Run Playwright tests
         working-directory: ./sites/web

@@ -32,6 +32,5 @@ export async function generateVisualTestParams(page: Page) {
 
 export async function goToAndWait(page: Page, url: string) {
   await page.goto(url)
-  await page.waitForLoadState('domcontentloaded')
-  await page.waitForLoadState('networkidle')
+  await page.waitForLoadState()
 }

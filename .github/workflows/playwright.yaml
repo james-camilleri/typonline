@@ -43,7 +43,7 @@ jobs:
         with:
           key: cache/${{github.repository}}/${{github.ref}}
           restore-keys: cache/${{github.repository}}/refs/heads/master
-          path: sites/web/test/**
+          path: sites/web/tests/**
 
       - name: Wait for Netlify deploy preview
         uses: jakepartusch/wait-for-netlify-action@v1.2

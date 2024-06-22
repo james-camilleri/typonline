@@ -5,7 +5,11 @@
 .env.*
 .netlify
 .svelte-kit
-/build
-/package
-dist
-node_modules
+build/
+package/
+dist/
+node_modules/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/

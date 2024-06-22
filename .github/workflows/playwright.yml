@@ -17,10 +17,8 @@ jobs:
       - name: Install dependencies
         run: npm install -g pnpm && pnpm install
 
-      - name: Change working directory
-        run: cd ./sites/web
-
       - name: Install Playwright browsers
+        working-directory: ./sites/web
         run: pnpm exec playwright install --with-deps
 
       - name: Wait for Netlify deploy preview
@@ -31,6 +29,7 @@ jobs:
           max_timeout: 360 # 6 Minutes, depends on your build pipeline duration
 
       - name: Run Playwright tests
+        working-directory: ./sites/web
         run: pnpm exec playwright test
       - uses: actions/upload-artifact@v4
         if: always()

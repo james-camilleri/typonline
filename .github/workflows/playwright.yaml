@@ -56,7 +56,7 @@ jobs:
         if: github.ref != 'refs/heads/main'
         with:
           site_name: 'typonline'
-          max_timeout: 360 # 6 Minutes, depends on your build pipeline duration
+          max_timeout: 360 # 6 Minutes
 
       - name: Initialise snapshots
         working-directory: ./sites/web

@@ -2,8 +2,24 @@ name: Playwright Tests
 on:
   push:
     branches: [main]
+
   pull_request:
     branches: [main]
+
+  # Allow updating snapshots during manual runs
+  workflow_call:
+    inputs:
+      update-snapshots:
+        description: "Update snapshots?"
+        type: boolean
+
+  # Allow updating snapshots during automatic runs
+  workflow_dispatch:
+    inputs:
+      update-snapshots:
+        description: "Update snapshots?"
+        type: boolean
+
 jobs:
   test:
     timeout-minutes: 60
@@ -20,6 +36,19 @@ jobs:
       - name: Install Playwright browsers
         working-directory: ./sites/web
         run: pnpm exec playwright install --with-deps
+
+      - name: Set up cache
+        id: cache
+        uses: actions/cache@v4
+        with:
+          key: cache/${{github.repository}}/${{github.ref}}
+          restore-keys: cache/${{github.repository}}/refs/heads/master
+          path: ./sites/web/test/**
+
+      - name: Initialise snapshots
+        working-directory: ./sites/web
+        if: ${{steps.cache.outputs.cache-hit != 'true' || inputs.update-snapshots == 'true'}}
+        run: pnpm exec playwright test --update-snapshots
 
       - name: Wait for Netlify deploy preview
         uses: jakepartusch/wait-for-netlify-action@v1.2

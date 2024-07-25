@@ -70,4 +70,20 @@
     >, and the code for the web platform and APIs
     <a href="https://github.com/james-camilleri/typonline">here.</a>
   </p>
+  <p>
+    There's also a talk given by James at the London Creative Coding meetup in
+    February 2023 that describes some of the inner workings and process of the
+    project's construction.
+  </p>
+  <p>
+    <iframe
+      src="https://www.youtube.com/embed/L2U_Sd1qMJ4?si=Z8eOJ3UB17LBi8QW&amp;start=1032"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+      style="width: 100%; aspect-ratio: 16/9; border-radius: var(--border-radius);"
+    ></iframe>
+  </p>
 </div>

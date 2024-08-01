@@ -3,10 +3,17 @@
     heartbeatData,
     disconnectedSeconds,
     HEARTBEAT_TIMEOUT,
+    shouldAttemptConnection,
   } from '$lib/connection'
 
   let connected
   $: connected = !!$heartbeatData
+
+  $: connectionText = connected
+    ? 'connected'
+    : $shouldAttemptConnection
+      ? 'connecting'
+      : 'refresh to connect'
 </script>
 
 <div
@@ -14,10 +21,12 @@
   style:--colour={connected ? 'var(--success)' : 'var(--error)'}
   style:--timeout={connected ? `${HEARTBEAT_TIMEOUT / 1000}s` : '1s'}
 >
-  <div class="indicator" class:connected />
-  <p>{connected ? 'connected' : 'connecting'}</p>
+  {#if $shouldAttemptConnection}
+    <div class="indicator" class:connected />
+  {/if}
+  <p>{connectionText}</p>
   {#if connected}<small>({$heartbeatData.version})</small>{/if}
-  {#if !connected && $disconnectedSeconds}<small
+  {#if !connected && $disconnectedSeconds && $shouldAttemptConnection}<small
       >({$disconnectedSeconds}s)</small
     >{/if}
 </div>
@@ -25,8 +34,8 @@
 <style>
   .wrapper {
     display: flex;
-    align-items: center;
     gap: 0.5em;
+    align-items: center;
   }
 
   .indicator {

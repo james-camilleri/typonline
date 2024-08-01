@@ -1,13 +1,14 @@
-import { browser } from '$app/environment'
-import { get, writable } from 'svelte/store'
+import { writable } from 'svelte/store'
+
+const ONE_SECOND = 1000
+let connectionAttempts = 0
+let disconnectedInterval: number = null
+let webSocket: WebSocket = null
 
 export const heartbeatData = writable<{ version: string }>()
 export const disconnectedSeconds = writable(0)
-export const HEARTBEAT_TIMEOUT = 5000
-
-const ONE_SECOND = 1000
-let disconnectedInterval: number = null
-let webSocket: WebSocket = null
+export const shouldAttemptConnection = writable(true)
+export const HEARTBEAT_TIMEOUT = ONE_SECOND * 5
 
 type EventHandler = (payload: any) => void
 const handlers = new Map<string, EventHandler[]>()
@@ -25,14 +26,6 @@ export async function broadcast(payload: any) {
   })
 }
 
-// export async function fireEvent(event: { type: string; data: any }) {
-//   console.info(`Event fired (control panel): "${event.type}"`)
-//   fetch('/api/typewriter/event', {
-//     method: 'POST',
-//     body: JSON.stringify(event),
-//   })
-// }
-
 export async function fireEvent(event: { type: string; data?: any }) {
   if (event.type !== 'heartbeat') {
     console.info(`Event fired (control panel): "${event.type}"`)
@@ -41,30 +34,6 @@ export async function fireEvent(event: { type: string; data?: any }) {
 
   webSocket && webSocket.send(JSON.stringify(event))
 }
-
-// async function heartbeat() {
-//   const heartbeat = await fetch('/api/typewriter/heartbeat')
-
-//   if (heartbeat.ok) {
-//     if (!get(heartbeatData)) {
-//       clearInterval(disconnectedInterval)
-//       disconnectedInterval = null
-//       disconnectedSeconds.set(0)
-
-//       heartbeatData.set(await heartbeat.json())
-//       await initialiseWebSocket()
-//     }
-
-//     return
-//   }
-
-//   heartbeatData.set(null)
-//   if (!disconnectedInterval) {
-//     disconnectedInterval = setInterval(() => {
-//       disconnectedSeconds.update((seconds) => seconds + 1)
-//     }, ONE_SECOND)
-//   }
-// }
 
 function heartbeat() {
   fireEvent({ type: 'heartbeat' })
@@ -103,11 +72,22 @@ async function initialiseWebSocket() {
 }
 
 async function initialiseConnection() {
+  connectionAttempts += 1
+  if (connectionAttempts > 5) {
+    shouldAttemptConnection.set(false)
+    return
+  }
+
   try {
     webSocket = await initialiseWebSocket()
     heartbeat()
     heartbeatData.set({ version: '-' })
     resetDisconnectedCounter()
+
+    webSocket.onopen = () => {
+      connectionAttempts = 0
+      shouldAttemptConnection.set(true)
+    }
 
     webSocket.onerror = () => {
       webSocket.close()
@@ -135,7 +115,7 @@ async function initialiseConnection() {
   setInterval(heartbeat, HEARTBEAT_TIMEOUT)
 }
 
-if (browser) {
+export function connect() {
   initialiseConnection()
   onEvent('heartbeat', (version) => {
     heartbeatData.set({ version })

@@ -30,32 +30,6 @@
     }
   }
 
-  a {
-    margin: 0 var(--xs);
-  }
-
-  .icons {
-    display: flex;
-
-    // Only centre-align the icons if they
-    // aren't the first items in the footer.
-    &:not(:first-child) {
-      justify-content: center;
-    }
-  }
-
-  .icons a {
-    height: var(--xl);
-    color: var(--foreground);
-    transition: color var(--transition-fast) ease-in-out;
-
-    &:hover,
-    &:focus {
-      color: var(--primary);
-      background: none;
-    }
-  }
-
   // Horizontal desktop layout.
   @media (min-width: breakpoints.$sm) {
     footer {

@@ -1,5 +1,5 @@
 import { browser } from '$app/environment'
-import { get, writable } from 'svelte/store'
+import { writable } from 'svelte/store'
 
 export const heartbeatData = writable<{ version: string }>()
 export const disconnectedSeconds = writable(0)
@@ -25,14 +25,6 @@ export async function broadcast(payload: any) {
   })
 }
 
-// export async function fireEvent(event: { type: string; data: any }) {
-//   console.info(`Event fired (control panel): "${event.type}"`)
-//   fetch('/api/typewriter/event', {
-//     method: 'POST',
-//     body: JSON.stringify(event),
-//   })
-// }
-
 export async function fireEvent(event: { type: string; data?: any }) {
   if (event.type !== 'heartbeat') {
     console.info(`Event fired (control panel): "${event.type}"`)
@@ -41,30 +33,6 @@ export async function fireEvent(event: { type: string; data?: any }) {
 
   webSocket && webSocket.send(JSON.stringify(event))
 }
-
-// async function heartbeat() {
-//   const heartbeat = await fetch('/api/typewriter/heartbeat')
-
-//   if (heartbeat.ok) {
-//     if (!get(heartbeatData)) {
-//       clearInterval(disconnectedInterval)
-//       disconnectedInterval = null
-//       disconnectedSeconds.set(0)
-
-//       heartbeatData.set(await heartbeat.json())
-//       await initialiseWebSocket()
-//     }
-
-//     return
-//   }
-
-//   heartbeatData.set(null)
-//   if (!disconnectedInterval) {
-//     disconnectedInterval = setInterval(() => {
-//       disconnectedSeconds.update((seconds) => seconds + 1)
-//     }, ONE_SECOND)
-//   }
-// }
 
 function heartbeat() {
   fireEvent({ type: 'heartbeat' })

@@ -1,13 +1,14 @@
-import { browser } from '$app/environment'
 import { writable } from 'svelte/store'
+
+const ONE_SECOND = 1000
+let connectionAttempts = 0
+let disconnectedInterval: number = null
+let webSocket: WebSocket = null
 
 export const heartbeatData = writable<{ version: string }>()
 export const disconnectedSeconds = writable(0)
-export const HEARTBEAT_TIMEOUT = 5000
-
-const ONE_SECOND = 1000
-let disconnectedInterval: number = null
-let webSocket: WebSocket = null
+export const shouldAttemptConnection = writable(true)
+export const HEARTBEAT_TIMEOUT = ONE_SECOND * 5
 
 type EventHandler = (payload: any) => void
 const handlers = new Map<string, EventHandler[]>()
@@ -71,11 +72,22 @@ async function initialiseWebSocket() {
 }
 
 async function initialiseConnection() {
+  connectionAttempts += 1
+  if (connectionAttempts > 5) {
+    shouldAttemptConnection.set(false)
+    return
+  }
+
   try {
     webSocket = await initialiseWebSocket()
     heartbeat()
     heartbeatData.set({ version: '-' })
     resetDisconnectedCounter()
+
+    webSocket.onopen = () => {
+      connectionAttempts = 0
+      shouldAttemptConnection.set(true)
+    }
 
     webSocket.onerror = () => {
       webSocket.close()
@@ -103,7 +115,7 @@ async function initialiseConnection() {
   setInterval(heartbeat, HEARTBEAT_TIMEOUT)
 }
 
-if (browser) {
+export function connect() {
   initialiseConnection()
   onEvent('heartbeat', (version) => {
     heartbeatData.set({ version })

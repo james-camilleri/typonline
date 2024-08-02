@@ -1,11 +1,12 @@
 import { json } from '@sveltejs/kit'
-import sanityClient from '@sanity/client'
+import { createClient } from '@sanity/client'
 import CONFIG from '$lib/config'
+import { env } from '../../env'
 
 const { projectId, dataset, apiVersion } = CONFIG.SANITY
-const { SANITY_API_KEY } = process.env
+const { SANITY_API_KEY } = env
 
-const client = sanityClient({
+const client = createClient({
   projectId,
   dataset,
   apiVersion,

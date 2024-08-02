@@ -23,6 +23,7 @@
     "@beyonk/gdpr-cookie-consent-banner": "^9.1.1",
     "@fortawesome/fontawesome-free": "^6.6.0",
     "@james-camilleri/sanity-web-image": "^2.1.12",
+    "@netlify/edge-functions": "^2.10.0",
     "@playwright/test": "^1.45.3",
     "@poppanator/sveltekit-svg": "^0.3.4",
     "@portabletext/svelte": "^0.2.0",

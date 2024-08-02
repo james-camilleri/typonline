@@ -1,6 +1,7 @@
 import { createClient } from '@sanity/client'
 import type { RequestEvent } from '@sveltejs/kit'
 import CONFIG from '$lib/config'
+import { env } from '../../api/env'
 
 export interface FeedbackPayload {
   name?: string
@@ -26,7 +27,7 @@ export async function POST({ request }: { request: FeedbackRequestEvent }) {
 async function postToSanity(sanityPayload: FeedbackPayload) {
   const { name, email, message } = sanityPayload
   const { projectId, dataset, apiVersion } = CONFIG.SANITY
-  const { SANITY_API_KEY } = process.env
+  const { SANITY_API_KEY } = env
 
   const client = createClient({
     projectId,

@@ -72,6 +72,9 @@ importers:
       '@james-camilleri/sanity-web-image':
         specifier: ^2.1.12
         version: 2.1.12
+      '@netlify/edge-functions':
+        specifier: ^2.10.0
+        version: 2.10.0
       '@playwright/test':
         specifier: ^1.45.3
         version: 1.45.3
@@ -1276,6 +1279,9 @@ packages:
 
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
+
+  '@netlify/edge-functions@2.10.0':
+    resolution: {integrity: sha512-toDBus02KyXTeErqXh9mFjH5ocGwSDO8w9q1TkSincqExtm8TMITg3iXr4/SPKE17nKt+olsEuIry5hyM8OJBQ==}
 
   '@netlify/functions@1.6.0':
     resolution: {integrity: sha512-6G92AlcpFrQG72XU8YH8pg94eDnq7+Q0YJhb8x4qNpdGsvuzvrfHWBmqFGp/Yshmv4wex9lpsTRZOocdrA2erQ==}
@@ -6603,6 +6609,8 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.0
 
   '@juggle/resize-observer@3.4.0': {}
+
+  '@netlify/edge-functions@2.10.0': {}
 
   '@netlify/functions@1.6.0':
     dependencies:

@@ -38,7 +38,7 @@ jobs:
         run: npm install -g pnpm && pnpm install
 
       - name: Install Playwright browsers
-        working-directory: ./sites/web
+        working-directory: sites/web
         run: pnpm exec playwright install --with-deps
 
       - name: Set up cache
@@ -59,14 +59,14 @@ jobs:
           max_timeout: 360 # 6 Minutes
 
       - name: Initialise snapshots
-        working-directory: ./sites/web
+        working-directory: sites/web
         if: ${{steps.cache.outputs.cache-hit != 'true' || inputs.update-snapshots == 'true'}}
         run: pnpm exec playwright test --update-snapshots
         env:
           PLAYWRIGHT_BASE_URL: ${{ steps.netlify-deploy-preview.outputs.url || env.PROD_URL }}
 
       - name: Run Playwright tests
-        working-directory: ./sites/web
+        working-directory: sites/web
         run: pnpm exec playwright test
         env:
           PLAYWRIGHT_BASE_URL: ${{ steps.netlify-deploy-preview.outputs.url || env.PROD_URL }}
